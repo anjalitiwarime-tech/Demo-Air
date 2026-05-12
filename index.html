@@ -17,7 +17,7 @@
   --gold:#d7ad5d;
   --mint:#dff7f0;
   --paper:#f7f9fc;
-  --line:#dce5ef;
+  --line:#dce5ef;98
   --muted:#64748b;
   --white:#fff;
   --shadow-sm:0 10px 30px rgba(8,29,61,.08);
@@ -72,7 +72,7 @@ img{display:block;max-width:100%}
 .mobile-panel a{font-weight:800;color:#243447}
 
 .hero{position:relative;min-height:100vh;padding:132px 0 58px;display:flex;align-items:center;overflow:hidden;color:#fff}
-.hero-media{position:absolute;inset:0;background:url("assets/airr.png") center 28%/cover no-repeat;transform:translateY(var(--parallax,0));scale:1.05;will-change:transform}
+.hero-media{position:absolute;inset:0;background:var(--hero-bg,url("./assets/airr.png")) center 28%/cover no-repeat;transform:translateY(var(--parallax,0)) scale(1.05);will-change:transform}
 .hero::before{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(3,14,32,.86) 0%,rgba(7,22,48,.58) 44%,rgba(7,22,48,.2) 70%),linear-gradient(180deg,rgba(5,20,45,.25),rgba(5,20,45,.74))}
 .hero::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:170px;background:linear-gradient(180deg,transparent,#fff)}
 .hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,1fr) 430px;gap:52px;align-items:end}
@@ -260,7 +260,7 @@ footer{background:#07101f;color:rgba(255,255,255,.68);padding:58px 0 28px}
 <nav class="navbar" id="navbar">
   <div class="nav-inner">
     <a class="brand" href="#">
-      <img class="brand-mark" src="assets/airrlogo.png" alt="SkyFlew logo" />
+      <img class="brand-mark" src="./assets/airrlogo.png" alt="SkyFlew logo" />
       <span class="brand-name">SkyFlew</span>
     </a>
     <ul class="nav-links">
@@ -299,7 +299,7 @@ footer{background:#07101f;color:rgba(255,255,255,.68);padding:58px 0 28px}
     </div>
     <aside class="hero-card reveal">
       <div class="mini-story">
-        <div class="story-img"><img src="assets/passenger-window.jpg" alt="Passenger looking through an airplane window" /></div>
+        <div class="story-img"><img src="./assets/passenger-window.jpg" alt="Passenger looking through an airplane window" /></div>
         <div>
           <h3>Window-seat wonder, planned in minutes.</h3>
           <p>Smart routing and flexible fares help every trip begin with confidence, not comparison fatigue.</p>
@@ -351,7 +351,7 @@ footer{background:#07101f;color:rgba(255,255,255,.68);padding:58px 0 28px}
   <section class="trust-band">
     <div class="container trust-grid">
       <div class="trust-photo reveal">
-        <img src="assets/runway-service.jpg" alt="Ground crew guiding an airplane on the runway" />
+        <img src="./assets/runway-service.jpg" alt="Ground crew guiding an airplane on the runway" />
         <span>Runway-tested service from booking to boarding.</span>
       </div>
       <div class="trust-item reveal"><b>98%</b><span>On-time departure reliability across partner routes.</span></div>
@@ -374,7 +374,7 @@ footer{background:#07101f;color:rgba(255,255,255,.68);padding:58px 0 28px}
       <div class="deal-grid">
         <article class="deal-card reveal">
           <div class="deal-image">
-            <img src="assets/city-skyline-plane.jpg" alt="Airplane passing over a city skyline" />
+            <img src="./assets/city-skyline-plane.jpg" alt="Airplane passing over a city skyline" />
             <span class="deal-badge">Business route</span>
           </div>
           <div class="deal-body">
@@ -385,7 +385,7 @@ footer{background:#07101f;color:rgba(255,255,255,.68);padding:58px 0 28px}
         </article>
         <article class="deal-card reveal">
           <div class="deal-image">
-            <img src="assets/wing-engine.jpg" alt="Airplane engine and wing at the airport" />
+            <img src="./assets/wing-engine.jpg" alt="Airplane engine and wing at the airport" />
             <span class="deal-badge">Premium value</span>
           </div>
           <div class="deal-body">
@@ -396,7 +396,7 @@ footer{background:#07101f;color:rgba(255,255,255,.68);padding:58px 0 28px}
         </article>
         <article class="deal-card reveal">
           <div class="deal-image">
-            <img src="assets/passenger-window.jpg" alt="Passenger watching clouds from an airplane window" />
+            <img src="./assets/passenger-window.jpg" alt="Passenger watching clouds from an airplane window" />
             <span class="deal-badge">Weekend escape</span>
           </div>
           <div class="deal-body">
@@ -412,7 +412,7 @@ footer{background:#07101f;color:rgba(255,255,255,.68);padding:58px 0 28px}
   <section class="section destinations" id="destinations">
     <div class="container destination-layout">
       <article class="destination-feature reveal">
-        <img src="assets/wing-clouds.jpg" alt="Airplane wing flying over ocean and clouds" />
+        <img src="./assets/wing-clouds.jpg" alt="Airplane wing flying over ocean and clouds" />
         <div class="feature-copy">
           <span class="pill">Air exploration</span>
           <h3>Journeys that begin above the clouds.</h3>
@@ -428,19 +428,19 @@ footer{background:#07101f;color:rgba(255,255,255,.68);padding:58px 0 28px}
         </div>
         <div class="package-grid">
           <article class="package-card reveal">
-            <img src="assets/europe-lucerne.jpg" alt="Lucerne waterfront in Europe" />
+            <img src="./assets/europe-lucerne.jpg" alt="Lucerne waterfront in Europe" />
             <div class="package-copy"><span class="pill">Europe classic</span><h3>Lucerne Escape</h3><p>7 days from Rs 64,000</p></div>
           </article>
           <article class="package-card reveal">
-            <img src="assets/alpine-lake.jpg" alt="Alpine lake and castle scenery" />
+            <img src="./assets/alpine-lake.jpg" alt="Alpine lake and castle scenery" />
             <div class="package-copy"><span class="pill">Lake retreat</span><h3>Swiss Riviera</h3><p>5 days from Rs 58,500</p></div>
           </article>
           <article class="package-card reveal">
-            <img src="assets/tropical-sunset.jpg" alt="Tropical palm trees at sunset" />
+            <img src="./assets/tropical-sunset.jpg" alt="Tropical palm trees at sunset" />
             <div class="package-copy"><span class="pill">Beach break</span><h3>Island Evenings</h3><p>4 days from Rs 31,900</p></div>
           </article>
           <article class="package-card reveal">
-            <img src="assets/city-skyline-plane.jpg" alt="Aircraft over downtown skyline" />
+            <img src="./assets/city-skyline-plane.jpg" alt="Aircraft over downtown skyline" />
             <div class="package-copy"><span class="pill">Urban arrival</span><h3>Global Cities</h3><p>3 days from Rs 24,700</p></div>
           </article>
         </div>
@@ -459,15 +459,15 @@ footer{background:#07101f;color:rgba(255,255,255,.68);padding:58px 0 28px}
       </div>
       <div class="cabin-grid">
         <article class="cabin-card large reveal">
-          <div class="cabin-img"><img src="assets/first-class.png" alt="Luxury first class cabin" /></div>
+          <div class="cabin-img"><img src="./assets/first-class.png" alt="Luxury first class cabin" /></div>
           <div class="cabin-body"><h3>First Class calm</h3><p>Private space, warm materials, lie-flat rest, and elevated service for long-haul travelers.</p></div>
         </article>
         <article class="cabin-card reveal">
-          <div class="cabin-img"><img src="assets/economy-seat.png" alt="Comfortable economy airline seats" /></div>
+          <div class="cabin-img"><img src="./assets/economy-seat.png" alt="Comfortable economy airline seats" /></div>
           <div class="cabin-body"><h3>Economy comfort</h3><p>Modern seating, clear fare choices, and practical upgrades without losing value.</p></div>
         </article>
         <article class="cabin-card reveal">
-          <div class="cabin-img"><img src="assets/runway-service.jpg" alt="Airport runway service and aircraft" /></div>
+          <div class="cabin-img"><img src="./assets/runway-service.jpg" alt="Airport runway service and aircraft" /></div>
           <div class="cabin-body"><h3>Operational trust</h3><p>Safety, ground coordination, and punctual operations made visible where trust matters most.</p></div>
         </article>
       </div>
@@ -486,9 +486,9 @@ footer{background:#07101f;color:rgba(255,255,255,.68);padding:58px 0 28px}
         </div>
       </div>
       <div class="story-collage reveal">
-        <figure><img src="assets/passenger-window.jpg" alt="Passenger viewing clouds from an airplane window" /></figure>
-        <figure><img src="assets/wing-engine.jpg" alt="Airport wing and engine view" /></figure>
-        <figure><img src="assets/europe-lucerne.jpg" alt="European waterfront travel destination" /></figure>
+        <figure><img src="./assets/passenger-window.jpg" alt="Passenger viewing clouds from an airplane window" /></figure>
+        <figure><img src="./assets/wing-engine.jpg" alt="Airport wing and engine view" /></figure>
+        <figure><img src="./assets/europe-lucerne.jpg" alt="European waterfront travel destination" /></figure>
       </div>
     </div>
   </section>
@@ -499,7 +499,7 @@ footer{background:#07101f;color:rgba(255,255,255,.68);padding:58px 0 28px}
         <p class="eyebrow">Help center</p>
         <h2 class="section-title">Answers before you fly.</h2>
         <p class="section-copy">Support content sits beside a service image, reinforcing that assistance continues after checkout.</p>
-        <div class="faq-side-img"><img src="assets/wing-engine.jpg" alt="Aircraft wing and engine during boarding" /></div>
+        <div class="faq-side-img"><img src="./assets/wing-engine.jpg" alt="Aircraft wing and engine during boarding" /></div>
       </aside>
       <div class="faq-list reveal">
         <div class="faq-item open">
@@ -523,7 +523,7 @@ footer{background:#07101f;color:rgba(255,255,255,.68);padding:58px 0 28px}
   </section>
 
   <section class="closing-cta">
-    <img src="assets/tropical-sunset.jpg" alt="Tropical sunset with palms" />
+    <img src="./assets/tropical-sunset.jpg" alt="Tropical sunset with palms" />
     <div class="container closing-inner reveal">
       <div>
         <h2>Ready when your next destination is.</h2>
@@ -538,7 +538,7 @@ footer{background:#07101f;color:rgba(255,255,255,.68);padding:58px 0 28px}
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <div class="footer-logo"><img src="assets/airrlogo.png" alt="SkyFlew logo" /><span>SkyFlew</span></div>
+        <div class="footer-logo"><img src="./assets/airrlogo.png" alt="SkyFlew logo" /><span>SkyFlew</span></div>
         <p>Premium airline booking for travelers who value clarity, comfort, and beautifully planned journeys.</p>
       </div>
       <div class="footer-col">
@@ -570,6 +570,22 @@ const heroMedia=document.getElementById("heroMedia");
 const menuBtn=document.getElementById("menuBtn");
 const mobilePanel=document.getElementById("mobilePanel");
 
+const getAssetBase=()=>{
+  const path=window.location.pathname;
+  const repoName="Demo-Air";
+  if(window.location.hostname.endsWith("github.io") && path.toLowerCase().includes(`/${repoName.toLowerCase()}`)){
+    return `/${repoName}/assets/`;
+  }
+  return new URL("./assets/",window.location.href).href;
+};
+
+const assetBase=getAssetBase();
+document.documentElement.style.setProperty("--hero-bg",`url("${assetBase}airr.png")`);
+document.querySelectorAll("img[src*='assets/']").forEach(img=>{
+  const fileName=img.getAttribute("src").split("/").pop();
+  img.src=`${assetBase}${fileName}`;
+});
+
 window.addEventListener("scroll",()=>{
   const y=window.scrollY;
   navbar.classList.toggle("scrolled",y>24);
@@ -595,15 +611,20 @@ document.querySelectorAll(".faq-question").forEach(button=>{
   });
 });
 
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      entry.target.classList.add("visible");
-      observer.unobserve(entry.target);
-    }
-  });
-},{threshold:.14});
-document.querySelectorAll(".reveal").forEach(item=>observer.observe(item));
+const revealItems=document.querySelectorAll(".reveal");
+if("IntersectionObserver" in window){
+  const observer=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  },{threshold:.14});
+  revealItems.forEach(item=>observer.observe(item));
+}else{
+  revealItems.forEach(item=>item.classList.add("visible"));
+}
 </script>
 </body>
 </html>
