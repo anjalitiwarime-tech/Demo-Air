@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SkyFlew – Fly Higher, Pay Less</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --sky:#1560BD;
+  --sky-dark:#0d3f80;
+  --sky-light:#4A90D9;
+  --sky-pale:#E8F2FF;
+  --accent:#00C6FF;
+  --white:#ffffff;
+  --off-white:#F7F9FC;
+  --gray-100:#f0f4f8;
+  --gray-200:#e2e8f0;
+  --gray-400:#94a3b8;
+  --gray-600:#475569;
+  --gray-800:#1e293b;
+  --text:#0f172a;
+  --shadow-sm:0 1px 3px rgba(0,0,0,0.08);
+  --shadow-md:0 4px 24px rgba(0,0,0,0.10);
+  --shadow-lg:0 16px 48px rgba(0,0,0,0.14);
+  --r:14px;
+  --r-sm:8px;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'DM Sans',sans-serif;color:var(--text);background:var(--white);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+button{cursor:pointer;font-family:inherit}
+
+/* ── NAVBAR ── */
+.navbar{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 48px;height:68px;
+  background:rgba(255,255,255,0.96);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(0,0,0,0.06);
+  transition:box-shadow .3s;
+}
+.navbar.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.10)}
+.nav-logo{display:flex;align-items:center;gap:10px}
+.nav-logo img{height:42px;width:42px;object-fit:contain;filter:none}
+.nav-logo-text{font-family:'Playfair Display',serif;font-size:1.45rem;font-weight:700;color:var(--sky-dark);letter-spacing:-.5px}
+.nav-links{display:flex;align-items:center;gap:32px;list-style:none}
+.nav-links a{font-size:.9rem;font-weight:500;color:var(--gray-600);transition:color .2s}
+.nav-links a:hover{color:var(--sky)}
+.nav-right{display:flex;align-items:center;gap:14px}
+.btn-login{font-size:.9rem;font-weight:500;color:var(--sky);background:none;border:none;padding:8px 0}
+.btn-book{background:var(--sky);color:var(--white);font-size:.88rem;font-weight:600;padding:10px 22px;border-radius:50px;border:none;transition:background .2s,transform .15s}
+.btn-book:hover{background:var(--sky-dark);transform:translateY(-1px)}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:4px}
+.hamburger span{width:22px;height:2px;background:var(--gray-800);border-radius:2px;transition:.3s}
+.mobile-menu{display:none;position:fixed;top:68px;left:0;right:0;background:white;border-top:1px solid var(--gray-200);padding:20px 24px;z-index:999;flex-direction:column;gap:16px;box-shadow:var(--shadow-md)}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-size:1rem;font-weight:500;color:var(--gray-700);padding:4px 0;border-bottom:1px solid var(--gray-100)}
+
+/* ── HERO ── */
+.hero{
+  position:relative;min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
+  padding-top:68px;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background-image:url('airr.png');
+  background-size:cover;background-position:center 30%;
+  filter:brightness(.55);
+  z-index:0;
+}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,30,70,.45) 0%,rgba(10,30,70,.3) 55%,rgba(10,30,70,.7) 100%);z-index:1}
+.hero-content{position:relative;z-index:2;text-align:center;color:white;padding:80px 24px 0;max-width:760px}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.15);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.25);border-radius:50px;padding:6px 16px;font-size:.8rem;font-weight:500;letter-spacing:.5px;margin-bottom:28px;text-transform:uppercase}
+.hero-badge::before{content:'✈';font-size:.9rem}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,5vw,3.8rem);font-weight:700;line-height:1.12;margin-bottom:20px;text-shadow:0 2px 20px rgba(0,0,0,.3)}
+.hero-title span{color:var(--accent)}
+.hero-subtitle{font-size:1.05rem;color:rgba(255,255,255,.82);line-height:1.7;max-width:540px;margin:0 auto 36px}
+.hero-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn-primary{background:var(--sky);color:white;font-size:.95rem;font-weight:600;padding:14px 34px;border-radius:50px;border:none;transition:.2s;display:inline-flex;align-items:center;gap:8px}
+.btn-primary:hover{background:var(--sky-dark);transform:translateY(-2px);box-shadow:0 8px 24px rgba(21,96,189,.4)}
+.btn-secondary{background:rgba(255,255,255,.15);color:white;border:1.5px solid rgba(255,255,255,.55);font-size:.95rem;font-weight:500;padding:14px 34px;border-radius:50px;backdrop-filter:blur(6px);transition:.2s}
+.btn-secondary:hover{background:rgba(255,255,255,.22);transform:translateY(-2px)}
+
+/* BOOKING WIDGET */
+.booking-wrap{position:relative;z-index:2;width:100%;max-width:960px;margin:44px auto 0;padding:0 20px}
+.booking-card{
+  background:rgba(255,255,255,.97);backdrop-filter:blur(20px);
+  border-radius:24px;box-shadow:0 24px 80px rgba(0,0,0,.22);
+  padding:28px 32px;
+}
+.booking-tabs{display:flex;gap:0;margin-bottom:24px;background:var(--gray-100);border-radius:50px;padding:4px;width:fit-content}
+.booking-tab{background:none;border:none;padding:8px 22px;border-radius:50px;font-size:.88rem;font-weight:500;color:var(--gray-600);transition:.2s}
+.booking-tab.active{background:var(--sky);color:white}
+.booking-fields{display:grid;grid-template-columns:1fr 1fr 1fr 1fr auto;gap:12px;align-items:end}
+.field-group{display:flex;flex-direction:column;gap:6px}
+.field-group label{font-size:.75rem;font-weight:600;color:var(--gray-400);letter-spacing:.6px;text-transform:uppercase}
+.field-group input,.field-group select{
+  border:1.5px solid var(--gray-200);border-radius:10px;
+  padding:12px 14px;font-size:.92rem;font-family:inherit;
+  color:var(--text);background:white;outline:none;
+  transition:border-color .2s;
+}
+.field-group input:focus,.field-group select:focus{border-color:var(--sky)}
+.field-divider{position:relative;display:flex;align-items:center;justify-content:center}
+.swap-btn{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:32px;height:32px;border-radius:50%;
+  background:var(--sky);border:2.5px solid white;
+  color:white;font-size:.85rem;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:.2s;z-index:1;
+}
+.swap-btn:hover{background:var(--sky-dark);transform:translate(-50%,-50%) rotate(180deg)}
+.btn-search{
+  background:var(--sky);color:white;border:none;
+  border-radius:12px;height:50px;width:52px;
+  font-size:1.2rem;transition:.2s;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+}
+.btn-search:hover{background:var(--sky-dark);transform:translateY(-2px)}
+
+/* ── TRUST BAR ── */
+.trust-bar{background:var(--sky-pale);padding:18px 48px;display:flex;align-items:center;justify-content:center;gap:48px;flex-wrap:wrap}
+.trust-item{display:flex;align-items:center;gap:10px;font-size:.88rem;font-weight:500;color:var(--sky-dark)}
+.trust-icon{width:36px;height:36px;border-radius:50%;background:var(--sky);color:white;display:flex;align-items:center;justify-content:center;font-size:.95rem}
+
+/* ── SECTION COMMON ── */
+.section{padding:88px 48px}
+.section-tag{font-size:.78rem;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:var(--sky);margin-bottom:10px}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.6rem);font-weight:700;color:var(--text);line-height:1.2;margin-bottom:14px}
+.section-sub{font-size:1rem;color:var(--gray-600);max-width:520px;line-height:1.7}
+
+/* ── DEALS ── */
+.deals-section{background:var(--off-white)}
+.deals-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:40px;flex-wrap:wrap;gap:16px}
+.deals-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.deal-card{
+  background:white;border-radius:var(--r);box-shadow:var(--shadow-sm);
+  overflow:hidden;transition:.25s;
+  display:flex;flex-direction:column;
+}
+.deal-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-md)}
+.deal-img{position:relative;height:190px;overflow:hidden}
+.deal-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.deal-card:hover .deal-img img{transform:scale(1.06)}
+.deal-badge{
+  position:absolute;top:14px;left:14px;
+  background:var(--sky);color:white;
+  font-size:.72rem;font-weight:700;letter-spacing:.5px;
+  padding:5px 12px;border-radius:50px;text-transform:uppercase;
+}
+.deal-badge.green{background:#16a34a}
+.deal-body{padding:18px 20px;flex:1;display:flex;flex-direction:column}
+.deal-route{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.deal-city{font-size:1rem;font-weight:600;color:var(--text)}
+.deal-arrow{color:var(--sky);font-size:.9rem}
+.deal-desc{font-size:.85rem;color:var(--gray-600);line-height:1.6;flex:1;margin-bottom:14px}
+.deal-footer{display:flex;align-items:center;justify-content:space-between}
+.deal-price{font-size:1.3rem;font-weight:700;color:var(--sky-dark)}
+.deal-price small{font-size:.75rem;font-weight:400;color:var(--gray-400)}
+.btn-deal{background:var(--sky-pale);color:var(--sky);border:none;border-radius:50px;padding:8px 18px;font-size:.82rem;font-weight:600;transition:.2s}
+.btn-deal:hover{background:var(--sky);color:white}
+.view-all{display:inline-flex;align-items:center;gap:6px;color:var(--sky);font-size:.9rem;font-weight:600;border:1.5px solid var(--sky);border-radius:50px;padding:10px 22px;transition:.2s}
+.view-all:hover{background:var(--sky);color:white}
+
+/* ── DESTINATIONS ── */
+.dest-section{background:white}
+.dest-tabs{display:flex;gap:8px;margin-bottom:36px;flex-wrap:wrap}
+.dest-tab{background:var(--gray-100);color:var(--gray-600);border:none;border-radius:50px;padding:8px 20px;font-size:.85rem;font-weight:500;transition:.2s}
+.dest-tab.active{background:var(--sky);color:white}
+.dest-tab:hover{background:var(--sky);color:white}
+.dest-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.dest-card{position:relative;border-radius:var(--r);overflow:hidden;cursor:pointer;aspect-ratio:.82}
+.dest-card img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.dest-card:hover img{transform:scale(1.08)}
+.dest-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top, rgba(10,20,50,.85) 0%, transparent 55%);
+  transition:.3s;
+}
+.dest-card:hover .dest-overlay{background:linear-gradient(to top,rgba(10,20,50,.92) 0%,rgba(10,20,50,.1) 60%)}
+.dest-info{position:absolute;bottom:0;left:0;right:0;padding:20px 18px;color:white}
+.dest-tag{font-size:.7rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;opacity:.8;margin-bottom:5px}
+.dest-name{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;margin-bottom:4px}
+.dest-from{font-size:.8rem;opacity:.75}
+.dest-pill{
+  display:inline-flex;align-items:center;gap:5px;
+  background:rgba(255,255,255,.15);backdrop-filter:blur(4px);
+  border:1px solid rgba(255,255,255,.25);
+  border-radius:50px;padding:3px 10px;
+  font-size:.7rem;margin-bottom:8px;
+}
+.dest-arrow{
+  position:absolute;top:16px;right:16px;
+  width:34px;height:34px;border-radius:50%;
+  background:rgba(255,255,255,.15);backdrop-filter:blur(6px);
+  display:flex;align-items:center;justify-content:center;
+  color:white;font-size:.9rem;
+  opacity:0;transition:.3s;
+}
+.dest-card:hover .dest-arrow{opacity:1}
+
+/* ── PREMIUM EXPERIENCE ── */
+.premium-section{background:var(--sky-dark);color:white;padding:88px 48px}
+.premium-header{text-align:center;margin-bottom:56px}
+.premium-header .section-tag{color:var(--accent)}
+.premium-header .section-title{color:white}
+.premium-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.prem-card{
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:var(--r);overflow:hidden;transition:.25s;
+}
+.prem-card:hover{background:rgba(255,255,255,.11);transform:translateY(-4px)}
+.prem-img{height:200px;overflow:hidden}
+.prem-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.prem-card:hover .prem-img img{transform:scale(1.05)}
+.prem-body{padding:22px}
+.prem-icon{font-size:1.5rem;margin-bottom:10px}
+.prem-title{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;margin-bottom:8px}
+.prem-desc{font-size:.88rem;color:rgba(255,255,255,.7);line-height:1.65}
+
+/* ── STATS ── */
+.stats-section{background:var(--sky);padding:56px 48px}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);text-align:center;gap:24px}
+.stat-num{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:700;color:white;line-height:1}
+.stat-label{font-size:.85rem;color:rgba(255,255,255,.75);margin-top:6px;font-weight:500}
+
+/* ── FAQ ── */
+.faq-section{background:var(--off-white)}
+.faq-wrap{max-width:780px;margin:0 auto}
+.faq-layout{display:grid;grid-template-columns:1fr 2fr;gap:64px;align-items:start}
+.faq-list{display:flex;flex-direction:column;gap:12px}
+.faq-item{
+  background:white;border-radius:var(--r-sm);
+  border:1.5px solid var(--gray-200);overflow:hidden;
+  transition:.2s;
+}
+.faq-item.open{border-color:var(--sky)}
+.faq-question{
+  width:100%;text-align:left;background:none;border:none;
+  padding:18px 20px;font-size:.93rem;font-weight:600;color:var(--text);
+  display:flex;justify-content:space-between;align-items:center;gap:12px;
+  cursor:pointer;
+}
+.faq-icon{
+  width:26px;height:26px;border-radius:50%;background:var(--sky-pale);
+  color:var(--sky);display:flex;align-items:center;justify-content:center;
+  font-size:.75rem;flex-shrink:0;transition:.3s;
+}
+.faq-item.open .faq-icon{background:var(--sky);color:white;transform:rotate(180deg)}
+.faq-answer{
+  max-height:0;overflow:hidden;transition:max-height .35s ease,padding .2s;
+  padding:0 20px;font-size:.88rem;color:var(--gray-600);line-height:1.7;
+}
+.faq-item.open .faq-answer{max-height:200px;padding:0 20px 18px}
+
+/* ── FOOTER ── */
+footer{background:#0a1628;color:rgba(255,255,255,.7);padding:64px 48px 32px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1.4fr;gap:40px;margin-bottom:48px}
+.footer-brand .nav-logo-text{color:white;font-size:1.5rem}
+.footer-brand p{font-size:.88rem;line-height:1.7;margin:14px 0 20px;max-width:260px}
+.social-links{display:flex;gap:10px}
+.social-link{
+  width:36px;height:36px;border-radius:50%;
+  background:rgba(255,255,255,.1);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.85rem;transition:.2s;
+  color:rgba(255,255,255,.7);
+}
+.social-link:hover{background:var(--sky);color:white}
+.footer-col h4{font-size:.85rem;font-weight:700;color:white;letter-spacing:.8px;text-transform:uppercase;margin-bottom:18px}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-col ul li a{font-size:.87rem;color:rgba(255,255,255,.6);transition:.2s}
+.footer-col ul li a:hover{color:white}
+.footer-newsletter input{
+  width:100%;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.12);
+  border-radius:10px;padding:12px 14px;color:white;font-size:.88rem;
+  font-family:inherit;outline:none;margin-bottom:10px;
+}
+.footer-newsletter input::placeholder{color:rgba(255,255,255,.4)}
+.footer-newsletter input:focus{border-color:var(--sky)}
+.btn-subscribe{width:100%;background:var(--sky);color:white;border:none;border-radius:10px;padding:12px;font-size:.88rem;font-weight:600;transition:.2s}
+.btn-subscribe:hover{background:var(--sky-light)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.footer-bottom p{font-size:.82rem}
+.footer-badges{display:flex;gap:12px}
+.badge{background:rgba(255,255,255,.07);border-radius:6px;padding:6px 12px;font-size:.75rem;color:rgba(255,255,255,.55)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .booking-fields{grid-template-columns:1fr 1fr 1fr;gap:10px}
+  .deals-grid{grid-template-columns:repeat(2,1fr)}
+  .dest-grid{grid-template-columns:repeat(2,1fr)}
+  .premium-grid{grid-template-columns:repeat(2,1fr)}
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  .navbar{padding:0 20px}
+  .nav-links,.nav-right{display:none}
+  .hamburger{display:flex}
+  .section{padding:64px 20px}
+  .deals-grid{grid-template-columns:1fr}
+  .dest-grid{grid-template-columns:1fr 1fr}
+  .premium-grid{grid-template-columns:1fr}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .faq-layout{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr}
+  .trust-bar{padding:18px 20px;gap:20px}
+  .booking-card{padding:20px 16px}
+  .booking-fields{grid-template-columns:1fr 1fr;gap:10px}
+  .booking-fields .btn-search{width:100%;height:48px}
+  .hero-content{padding-top:50px}
+  footer{padding:48px 20px 24px}
+}
+@media(max-width:480px){
+  .dest-grid{grid-template-columns:1fr}
+  .booking-fields{grid-template-columns:1fr}
+  .deals-header{flex-direction:column;align-items:flex-start}
+}
+
+/* ANIMATION */
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.hero-content>*{animation:fadeUp .7s ease both}
+.hero-badge{animation-delay:.1s}
+.hero-title{animation-delay:.2s}
+.hero-subtitle{animation-delay:.32s}
+.hero-ctas{animation-delay:.44s}
+.booking-card{animation:fadeUp .7s ease .55s both}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-logo">
+    <img src="airrlogo.png" alt="SkyFlew logo"/>
+    <span class="nav-logo-text">SkyFlew</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#">Book</a></li>
+    <li><a href="#">Trips</a></li>
+    <li><a href="#">Check-in</a></li>
+    <li><a href="#deals">Deals &amp; Offers</a></li>
+    <li><a href="#destinations">Destinations</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="btn-login">Login</button>
+    <button class="btn-book">✈ Booking Now</button>
+  </div>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#">Book</a>
+  <a href="#">Trips</a>
+  <a href="#">Check-in</a>
+  <a href="#deals">Deals &amp; Offers</a>
+  <a href="#destinations">Destinations</a>
+  <a href="#">Login</a>
+  <button class="btn-book" style="width:100%;margin-top:4px">✈ Booking Now</button>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Premium Airline Booking</div>
+    <h1 class="hero-title">
+      Find &amp; Book Flights<br/>Quickly. <span>All in One Place.</span>
+    </h1>
+    <p class="hero-subtitle">
+      Can't get places without your airline and book with confidence —
+      domestic &amp; international routes covered.
+    </p>
+    <div class="hero-ctas">
+      <button class="btn-primary">✈ Search Flights</button>
+      <button class="btn-secondary">Explore Deals →</button>
+    </div>
+  </div>
+
+  <!-- BOOKING WIDGET -->
+  <div class="booking-wrap">
+    <div class="booking-card">
+      <div class="booking-tabs">
+        <button class="booking-tab active">One Way</button>
+        <button class="booking-tab">Round Trip</button>
+        <button class="booking-tab">Multi-City</button>
+      </div>
+      <div class="booking-fields">
+        <div class="field-group" style="position:relative">
+          <label>Journey From</label>
+          <input type="text" placeholder="Leaving from..." value="New Delhi, IND"/>
+          <div class="swap-btn" title="Swap">⇌</div>
+        </div>
+        <div class="field-group">
+          <label>Going To</label>
+          <input type="text" placeholder="Going to..." value="Dubai, UAE"/>
+        </div>
+        <div class="field-group">
+          <label>Date</label>
+          <input type="date" value="2026-06-15"/>
+        </div>
+        <div class="field-group">
+          <label>Class</label>
+          <select>
+            <option>Economy · 1 Passenger</option>
+            <option>Business · 1 Passenger</option>
+            <option>First · 1 Passenger</option>
+            <option>Economy · 2 Passengers</option>
+          </select>
+        </div>
+        <button class="btn-search" title="Search flights">🔍</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item">
+    <div class="trust-icon">✓</div>
+    No Hidden Fees
+  </div>
+  <div class="trust-item">
+    <div class="trust-icon">🔒</div>
+    Secure Booking
+  </div>
+  <div class="trust-item">
+    <div class="trust-icon">↺</div>
+    Free Cancellation
+  </div>
+  <div class="trust-item">
+    <div class="trust-icon">🌍</div>
+    200+ Destinations
+  </div>
+  <div class="trust-item">
+    <div class="trust-icon">✈</div>
+    50+ Airlines
+  </div>
+</div>
+
+<!-- DEALS -->
+<section class="section deals-section" id="deals">
+  <div class="deals-header">
+    <div>
+      <p class="section-tag">Hot Offers</p>
+      <h2 class="section-title">Cheap Flights on SkyFlew</h2>
+      <p class="section-sub">
+        SkyFlew makes finding and booking cheap flights simple and fast — we offer great deals on
+        <strong>one-way, return, international</strong> and multi-city trips.
+      </p>
+    </div>
+    <a href="#" class="view-all">Explore All →</a>
+  </div>
+  <div class="deals-grid">
+    <div class="deal-card">
+      <div class="deal-img">
+        <img src="pexels-bhuwan-dhingra-152723-452544.jpg" alt="Delhi to Dubai"/>
+        <span class="deal-badge">30% OFF</span>
+      </div>
+      <div class="deal-body">
+        <div class="deal-route">
+          <span class="deal-city">New Delhi</span>
+          <span class="deal-arrow">✈</span>
+          <span class="deal-city">Dubai</span>
+        </div>
+        <p class="deal-desc">Non-stop international flights with premium comfort and great savings on all seat classes.</p>
+        <div class="deal-footer">
+          <div class="deal-price">₹12,499 <small>/ person</small></div>
+          <button class="btn-deal">Book Now</button>
+        </div>
+      </div>
+    </div>
+    <div class="deal-card">
+      <div class="deal-img">
+        <img src="pexels-camcasey-1157255.jpg" alt="Mumbai to London"/>
+        <span class="deal-badge green">BEST VALUE</span>
+      </div>
+      <div class="deal-body">
+        <div class="deal-route">
+          <span class="deal-city">Mumbai</span>
+          <span class="deal-arrow">✈</span>
+          <span class="deal-city">London</span>
+        </div>
+        <p class="deal-desc">Round-trip deal with in-flight meals and extra baggage included. Limited seats available.</p>
+        <div class="deal-footer">
+          <div class="deal-price">₹48,900 <small>/ return</small></div>
+          <button class="btn-deal">Book Now</button>
+        </div>
+      </div>
+    </div>
+    <div class="deal-card">
+      <div class="deal-img">
+        <img src="pexels-jason-toevs-1047869-2033343_1.jpg" alt="Bangalore to Singapore"/>
+        <span class="deal-badge">ONE WAY</span>
+      </div>
+      <div class="deal-body">
+        <div class="deal-route">
+          <span class="deal-city">Bangalore</span>
+          <span class="deal-arrow">✈</span>
+          <span class="deal-city">Singapore</span>
+        </div>
+        <p class="deal-desc">Direct flights from Bangalore to Singapore every day with free check-in baggage up to 25kg.</p>
+        <div class="deal-footer">
+          <div class="deal-price">₹18,250 <small>/ person</small></div>
+          <button class="btn-deal">Book Now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DESTINATIONS -->
+<section class="section dest-section" id="destinations">
+  <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:28px;flex-wrap:wrap;gap:16px">
+    <div>
+      <p class="section-tag">Tour Packages</p>
+      <h2 class="section-title">Our tour package guarantees a<br/>smooth and unforgettable adventure.</h2>
+    </div>
+  </div>
+  <div class="dest-tabs">
+    <button class="dest-tab active">Trekking Adventure</button>
+    <button class="dest-tab">Air Exploration</button>
+    <button class="dest-tab">Cultural Insights Tour</button>
+    <button class="dest-tab">Sunrise View</button>
+  </div>
+  <div class="dest-grid">
+    <div class="dest-card">
+      <img src="pexels-jessbaileydesign-1655985.jpg" alt="Air Exploration"/>
+      <div class="dest-overlay"></div>
+      <div class="dest-arrow">↗</div>
+      <div class="dest-info">
+        <div class="dest-pill">✈ Air Exploration</div>
+        <div class="dest-name">Above the Clouds</div>
+        <div class="dest-from">From ₹8,499 · 3 days</div>
+      </div>
+    </div>
+    <div class="dest-card">
+      <img src="pexels-bhuwan-dhingra-152723-452544.jpg" alt="Cultural Insights Tour"/>
+      <div class="dest-overlay"></div>
+      <div class="dest-arrow">↗</div>
+      <div class="dest-info">
+        <div class="dest-pill">🏛 Cultural Insights</div>
+        <div class="dest-name">Lucerne, Switzerland</div>
+        <div class="dest-from">From ₹64,000 · 7 days</div>
+      </div>
+    </div>
+    <div class="dest-card">
+      <img src="pexels-jason-toevs-1047869-2033343_1.jpg" alt="Sunrise View"/>
+      <div class="dest-overlay"></div>
+      <div class="dest-arrow">↗</div>
+      <div class="dest-info">
+        <div class="dest-pill">🌅 Sunrise View</div>
+        <div class="dest-name">City Skyline Flight</div>
+        <div class="dest-from">From ₹22,000 · 4 days</div>
+      </div>
+    </div>
+    <div class="dest-card">
+      <img src="pexels-camcasey-1157255.jpg" alt="Weekend Getaway"/>
+      <div class="dest-overlay"></div>
+      <div class="dest-arrow">↗</div>
+      <div class="dest-info">
+        <div class="dest-pill">🏖 Weekend Getaway</div>
+        <div class="dest-name">Coastal Escape</div>
+        <div class="dest-from">From ₹14,500 · 2 days</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PREMIUM EXPERIENCE -->
+<section class="premium-section">
+  <div class="premium-header">
+    <p class="section-tag">Why Choose SkyFlew</p>
+    <h2 class="section-title">Your primary flight deals<br/>begin to feel left out.</h2>
+  </div>
+  <div class="premium-grid">
+    <div class="prem-card">
+      <div class="prem-img">
+        <img src="airseet3.png" alt="First Class Cabin"/>
+      </div>
+      <div class="prem-body">
+        <div class="prem-icon">👑</div>
+        <div class="prem-title">First Class Comfort</div>
+        <div class="prem-desc">Sink into plush lie-flat seats with personal screens, gourmet meals, and dedicated cabin service.</div>
+      </div>
+    </div>
+    <div class="prem-card">
+      <div class="prem-img">
+        <img src="airseet2.png" alt="Economy Seats"/>
+      </div>
+      <div class="prem-body">
+        <div class="prem-icon">💺</div>
+        <div class="prem-title">Economy Excellence</div>
+        <div class="prem-desc">Modern seat-back entertainment, extra legroom options, and complimentary snacks on every route.</div>
+      </div>
+    </div>
+    <div class="prem-card">
+      <div class="prem-img">
+        <img src="pexels-joerg-mangelsen-337913024-30756520.jpg" alt="On-ground service"/>
+      </div>
+      <div class="prem-body">
+        <div class="prem-icon">🛡️</div>
+        <div class="prem-title">Safety & Reliability</div>
+        <div class="prem-desc">Industry-leading safety checks, punctual departures, and 24/7 ground crew support at every airport.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-section">
+  <div class="stats-grid">
+    <div>
+      <div class="stat-num">12M+</div>
+      <div class="stat-label">Passengers Flown</div>
+    </div>
+    <div>
+      <div class="stat-num">200+</div>
+      <div class="stat-label">Global Destinations</div>
+    </div>
+    <div>
+      <div class="stat-num">98%</div>
+      <div class="stat-label">On-Time Departure</div>
+    </div>
+    <div>
+      <div class="stat-num">4.9★</div>
+      <div class="stat-label">Average Rating</div>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<section class="section faq-section" id="faq">
+  <div class="faq-layout">
+    <div>
+      <p class="section-tag">Help Center</p>
+      <h2 class="section-title">Frequently Asked</h2>
+      <p class="section-sub" style="margin-top:10px">This guide explains how SkyFlew meets your daily flight needs.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item open">
+        <button class="faq-question">
+          How do I book a flight on SkyFlew?
+          <span class="faq-icon">▼</span>
+        </button>
+        <div class="faq-answer">
+          Simply enter your origin, destination, travel dates, and passenger count in the search widget, then click Search. Browse results, select your preferred flight, and complete payment in a few clicks. A confirmation will be sent to your email instantly.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          What is the free baggage allowance?
+          <span class="faq-icon">▼</span>
+        </button>
+        <div class="faq-answer">
+          Economy passengers get 15kg check-in and 7kg cabin baggage. Business Class passengers receive 30kg check-in and 10kg cabin allowance. Additional baggage can be purchased during booking at a discounted rate.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          Can I cancel or modify my booking?
+          <span class="faq-icon">▼</span>
+        </button>
+        <div class="faq-answer">
+          Yes. Bookings can be cancelled or modified up to 24 hours before departure. Refunds are processed within 5–7 business days depending on your payment method. Some promotional fares may be non-refundable.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          How early should I check in online?
+          <span class="faq-icon">▼</span>
+        </button>
+        <div class="faq-answer">
+          Online check-in opens 48 hours and closes 1 hour before departure for domestic flights, and 24 hours before for international routes. We recommend checking in as early as possible to secure preferred seats.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          Is my payment information secure?
+          <span class="faq-icon">▼</span>
+        </button>
+        <div class="faq-answer">
+          Absolutely. All payments are processed through 256-bit SSL encryption. We are PCI-DSS compliant and never store your card details. You can pay via credit/debit card, UPI, net banking, or wallets.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          How do I contact SkyFlew customer support?
+          <span class="faq-icon">▼</span>
+        </button>
+        <div class="faq-answer">
+          Our support team is available 24/7 via live chat on the website, email at support@skyflew.com, or by calling our toll-free number 1800-SKY-FLEW. Average response time is under 5 minutes.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="nav-logo" style="margin-bottom:4px">
+        <img src="airrlogo.png" alt="SkyFlew" style="height:38px;filter:brightness(0) invert(1)"/>
+        <span class="nav-logo-text">SkyFlew</span>
+      </div>
+      <p>Your trusted partner for affordable and premium air travel. Domestic and international routes, all in one seamless platform.</p>
+      <div class="social-links">
+        <a class="social-link" href="#" title="Twitter">𝕏</a>
+        <a class="social-link" href="#" title="Facebook">f</a>
+        <a class="social-link" href="#" title="Instagram">◉</a>
+        <a class="social-link" href="#" title="LinkedIn">in</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#">Book a Flight</a></li>
+        <li><a href="#">My Trips</a></li>
+        <li><a href="#">Online Check-in</a></li>
+        <li><a href="#">Deals &amp; Offers</a></li>
+        <li><a href="#">Flight Status</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About SkyFlew</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Press Room</a></li>
+        <li><a href="#">Partner Airlines</a></li>
+        <li><a href="#">Sustainability</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Newsletter</h4>
+      <p style="font-size:.85rem;margin-bottom:14px;color:rgba(255,255,255,.55)">Get exclusive deals and travel tips delivered to your inbox.</p>
+      <div class="footer-newsletter">
+        <input type="email" placeholder="your@email.com"/>
+        <button class="btn-subscribe">Subscribe →</button>
+      </div>
+      <p style="font-size:.75rem;margin-top:10px;color:rgba(255,255,255,.35)">📞 1800-SKY-FLEW &nbsp;·&nbsp; support@skyflew.com</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 SkyFlew Airlines Pvt. Ltd. All rights reserved.</p>
+    <div class="footer-badges">
+      <span class="badge">Privacy Policy</span>
+      <span class="badge">Terms of Use</span>
+      <span class="badge">Cookie Settings</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Navbar scroll
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll',()=>{
+  navbar.classList.toggle('scrolled', window.scrollY > 20);
+});
+
+// Mobile menu
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+hamburger.addEventListener('click',()=>{
+  mobileMenu.classList.toggle('open');
+});
+
+// Booking tabs
+document.querySelectorAll('.booking-tab').forEach(tab=>{
+  tab.addEventListener('click',function(){
+    document.querySelectorAll('.booking-tab').forEach(t=>t.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+
+// Destination tabs
+document.querySelectorAll('.dest-tab').forEach(tab=>{
+  tab.addEventListener('click',function(){
+    document.querySelectorAll('.dest-tab').forEach(t=>t.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+
+// FAQ accordion
+document.querySelectorAll('.faq-question').forEach(btn=>{
+  btn.addEventListener('click',function(){
+    const item = this.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+    if(!isOpen) item.classList.add('open');
+  });
+});
+
+// Swap cities
+document.querySelector('.swap-btn').addEventListener('click',function(){
+  const fields = document.querySelectorAll('.booking-fields input[type="text"]');
+  if(fields.length>=2){
+    const tmp = fields[0].value;
+    fields[0].value = fields[1].value;
+    fields[1].value = tmp;
+  }
+});
+</script>
+</body>
+</html>
