@@ -1,816 +1,609 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>SkyFlew – Fly Higher, Pay Less</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SkyFlew - Premium Airline Booking</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --sky:#1560BD;
-  --sky-dark:#0d3f80;
-  --sky-light:#4A90D9;
-  --sky-pale:#E8F2FF;
-  --accent:#00C6FF;
-  --white:#ffffff;
-  --off-white:#F7F9FC;
-  --gray-100:#f0f4f8;
-  --gray-200:#e2e8f0;
-  --gray-400:#94a3b8;
-  --gray-600:#475569;
-  --gray-800:#1e293b;
-  --text:#0f172a;
-  --shadow-sm:0 1px 3px rgba(0,0,0,0.08);
-  --shadow-md:0 4px 24px rgba(0,0,0,0.10);
-  --shadow-lg:0 16px 48px rgba(0,0,0,0.14);
-  --r:14px;
-  --r-sm:8px;
+  --ink:#071629;
+  --navy:#081d3d;
+  --blue:#1266d6;
+  --blue-2:#32b8ff;
+  --gold:#d7ad5d;
+  --mint:#dff7f0;
+  --paper:#f7f9fc;
+  --line:#dce5ef;
+  --muted:#64748b;
+  --white:#fff;
+  --shadow-sm:0 10px 30px rgba(8,29,61,.08);
+  --shadow-md:0 18px 55px rgba(8,29,61,.14);
+  --shadow-lg:0 30px 90px rgba(8,29,61,.22);
+  --radius:18px;
+  --radius-sm:10px;
 }
-html{scroll-behavior:smooth;font-size:16px}
-body{font-family:'DM Sans',sans-serif;color:var(--text);background:var(--white);overflow-x:hidden}
-a{text-decoration:none;color:inherit}
-img{max-width:100%;display:block}
-button{cursor:pointer;font-family:inherit}
+html{scroll-behavior:smooth}
+body{font-family:"DM Sans",Arial,sans-serif;color:var(--ink);background:#fff;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button,input,select{font:inherit}
+button{cursor:pointer}
+img{display:block;max-width:100%}
+.container{width:min(1180px,calc(100% - 48px));margin-inline:auto}
+.eyebrow{font-size:.76rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);margin-bottom:10px}
+.section-title{font-family:"Playfair Display",Georgia,serif;font-size:clamp(2rem,4vw,3.2rem);line-height:1.05;letter-spacing:0;color:var(--ink)}
+.section-copy{max-width:610px;color:var(--muted);font-size:1rem;line-height:1.75;margin-top:14px}
+.section{padding:96px 0}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:none}
 
-/* ── NAVBAR ── */
 .navbar{
-  position:fixed;top:0;left:0;right:0;z-index:1000;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 48px;height:68px;
-  background:rgba(255,255,255,0.96);
-  backdrop-filter:blur(12px);
-  border-bottom:1px solid rgba(0,0,0,0.06);
-  transition:box-shadow .3s;
+  position:fixed;top:0;left:0;right:0;z-index:50;height:74px;
+  display:flex;align-items:center;transition:.3s ease;
+  background:linear-gradient(180deg,rgba(4,16,36,.72),rgba(4,16,36,.18),transparent);
 }
-.navbar.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.10)}
-.nav-logo{display:flex;align-items:center;gap:10px}
-.nav-logo img{height:42px;width:42px;object-fit:contain;filter:none}
-.nav-logo-text{font-family:'Playfair Display',serif;font-size:1.45rem;font-weight:700;color:var(--sky-dark);letter-spacing:-.5px}
-.nav-links{display:flex;align-items:center;gap:32px;list-style:none}
-.nav-links a{font-size:.9rem;font-weight:500;color:var(--gray-600);transition:color .2s}
-.nav-links a:hover{color:var(--sky)}
-.nav-right{display:flex;align-items:center;gap:14px}
-.btn-login{font-size:.9rem;font-weight:500;color:var(--sky);background:none;border:none;padding:8px 0}
-.btn-book{background:var(--sky);color:var(--white);font-size:.88rem;font-weight:600;padding:10px 22px;border-radius:50px;border:none;transition:background .2s,transform .15s}
-.btn-book:hover{background:var(--sky-dark);transform:translateY(-1px)}
-.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:4px}
-.hamburger span{width:22px;height:2px;background:var(--gray-800);border-radius:2px;transition:.3s}
-.mobile-menu{display:none;position:fixed;top:68px;left:0;right:0;background:white;border-top:1px solid var(--gray-200);padding:20px 24px;z-index:999;flex-direction:column;gap:16px;box-shadow:var(--shadow-md)}
-.mobile-menu.open{display:flex}
-.mobile-menu a{font-size:1rem;font-weight:500;color:var(--gray-700);padding:4px 0;border-bottom:1px solid var(--gray-100)}
+.navbar.scrolled{height:66px;background:rgba(255,255,255,.94);backdrop-filter:blur(18px);box-shadow:0 12px 40px rgba(8,29,61,.12)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;width:min(1220px,calc(100% - 48px));margin:auto}
+.brand{display:flex;align-items:center;gap:12px;color:#fff}
+.navbar.scrolled .brand{color:var(--navy)}
+.brand-mark{width:44px;height:44px;border-radius:12px;object-fit:cover;box-shadow:0 12px 28px rgba(0,0,0,.16)}
+.brand-name{font-family:"Playfair Display",Georgia,serif;font-weight:700;font-size:1.45rem;letter-spacing:0}
+.nav-links{display:flex;align-items:center;gap:30px;list-style:none;color:rgba(255,255,255,.88);font-size:.92rem;font-weight:700}
+.navbar.scrolled .nav-links{color:#334155}
+.nav-links a{transition:.2s}
+.nav-links a:hover{color:var(--blue-2)}
+.nav-actions{display:flex;align-items:center;gap:12px}
+.ghost-btn,.solid-btn{
+  border:0;border-radius:999px;padding:12px 20px;font-weight:800;font-size:.9rem;
+  transition:transform .2s,box-shadow .2s,background .2s,color .2s;
+}
+.ghost-btn{background:rgba(255,255,255,.13);color:#fff;border:1px solid rgba(255,255,255,.28)}
+.navbar.scrolled .ghost-btn{color:var(--navy);background:#eef5ff;border-color:#d8e8ff}
+.solid-btn{color:#fff;background:linear-gradient(135deg,var(--blue),var(--blue-2));box-shadow:0 14px 34px rgba(18,102,214,.32)}
+.solid-btn:hover,.ghost-btn:hover{transform:translateY(-2px)}
+.menu-btn{display:none;width:42px;height:42px;border:0;border-radius:12px;background:rgba(255,255,255,.16)}
+.menu-btn span{display:block;width:19px;height:2px;background:#fff;margin:5px auto;border-radius:2px}
+.navbar.scrolled .menu-btn span{background:var(--navy)}
+.mobile-panel{display:none;position:fixed;top:66px;left:16px;right:16px;z-index:60;background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow-lg);padding:18px}
+.mobile-panel.open{display:grid;gap:14px}
+.mobile-panel a{font-weight:800;color:#243447}
 
-/* ── HERO ── */
-.hero{
-  position:relative;min-height:100vh;
-  display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
-  padding-top:68px;overflow:hidden;
+.hero{position:relative;min-height:100vh;padding:132px 0 58px;display:flex;align-items:center;overflow:hidden;color:#fff}
+.hero-media{position:absolute;inset:0;background:url("assets/airr.png") center 28%/cover no-repeat;transform:translateY(var(--parallax,0));scale:1.05;will-change:transform}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(3,14,32,.86) 0%,rgba(7,22,48,.58) 44%,rgba(7,22,48,.2) 70%),linear-gradient(180deg,rgba(5,20,45,.25),rgba(5,20,45,.74))}
+.hero::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:170px;background:linear-gradient(180deg,transparent,#fff)}
+.hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,1fr) 430px;gap:52px;align-items:end}
+.hero-kicker{display:inline-flex;align-items:center;gap:10px;border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.12);backdrop-filter:blur(14px);border-radius:999px;padding:8px 15px;font-size:.78rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;margin-bottom:24px}
+.hero-kicker::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--gold);box-shadow:0 0 22px var(--gold)}
+.hero h1{font-family:"Playfair Display",Georgia,serif;font-size:clamp(3.1rem,7vw,6.7rem);line-height:.94;letter-spacing:0;max-width:830px;text-shadow:0 18px 54px rgba(0,0,0,.28)}
+.hero h1 span{color:#bfeaff}
+.hero-lede{max-width:620px;margin:24px 0 32px;color:rgba(255,255,255,.84);font-size:1.1rem;line-height:1.8}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+.hero-card{
+  align-self:center;border-radius:24px;padding:22px;background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.2);backdrop-filter:blur(16px);box-shadow:0 28px 90px rgba(0,0,0,.28);
 }
-.hero-bg{
-  position:absolute;inset:0;
-  background-image:url('airr.png');
-  background-size:cover;background-position:center 30%;
-  filter:brightness(.55);
-  z-index:0;
-}
-.hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,30,70,.45) 0%,rgba(10,30,70,.3) 55%,rgba(10,30,70,.7) 100%);z-index:1}
-.hero-content{position:relative;z-index:2;text-align:center;color:white;padding:80px 24px 0;max-width:760px}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.15);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.25);border-radius:50px;padding:6px 16px;font-size:.8rem;font-weight:500;letter-spacing:.5px;margin-bottom:28px;text-transform:uppercase}
-.hero-badge::before{content:'✈';font-size:.9rem}
-.hero-title{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,5vw,3.8rem);font-weight:700;line-height:1.12;margin-bottom:20px;text-shadow:0 2px 20px rgba(0,0,0,.3)}
-.hero-title span{color:var(--accent)}
-.hero-subtitle{font-size:1.05rem;color:rgba(255,255,255,.82);line-height:1.7;max-width:540px;margin:0 auto 36px}
-.hero-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-.btn-primary{background:var(--sky);color:white;font-size:.95rem;font-weight:600;padding:14px 34px;border-radius:50px;border:none;transition:.2s;display:inline-flex;align-items:center;gap:8px}
-.btn-primary:hover{background:var(--sky-dark);transform:translateY(-2px);box-shadow:0 8px 24px rgba(21,96,189,.4)}
-.btn-secondary{background:rgba(255,255,255,.15);color:white;border:1.5px solid rgba(255,255,255,.55);font-size:.95rem;font-weight:500;padding:14px 34px;border-radius:50px;backdrop-filter:blur(6px);transition:.2s}
-.btn-secondary:hover{background:rgba(255,255,255,.22);transform:translateY(-2px)}
+.mini-story{display:grid;gap:16px}
+.story-img{height:210px;border-radius:18px;overflow:hidden;position:relative}
+.story-img img{width:100%;height:100%;object-fit:cover}
+.story-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent,rgba(5,17,36,.65))}
+.mini-story h3{font-family:"Playfair Display",Georgia,serif;font-size:1.35rem}
+.mini-story p{color:rgba(255,255,255,.72);line-height:1.65;font-size:.92rem}
 
-/* BOOKING WIDGET */
-.booking-wrap{position:relative;z-index:2;width:100%;max-width:960px;margin:44px auto 0;padding:0 20px}
+.booking-shell{position:relative;z-index:5;margin-top:-70px}
 .booking-card{
-  background:rgba(255,255,255,.97);backdrop-filter:blur(20px);
-  border-radius:24px;box-shadow:0 24px 80px rgba(0,0,0,.22);
-  padding:28px 32px;
+  background:rgba(255,255,255,.93);border:1px solid rgba(255,255,255,.72);backdrop-filter:blur(22px);
+  border-radius:26px;box-shadow:var(--shadow-lg);padding:24px;
 }
-.booking-tabs{display:flex;gap:0;margin-bottom:24px;background:var(--gray-100);border-radius:50px;padding:4px;width:fit-content}
-.booking-tab{background:none;border:none;padding:8px 22px;border-radius:50px;font-size:.88rem;font-weight:500;color:var(--gray-600);transition:.2s}
-.booking-tab.active{background:var(--sky);color:white}
-.booking-fields{display:grid;grid-template-columns:1fr 1fr 1fr 1fr auto;gap:12px;align-items:end}
-.field-group{display:flex;flex-direction:column;gap:6px}
-.field-group label{font-size:.75rem;font-weight:600;color:var(--gray-400);letter-spacing:.6px;text-transform:uppercase}
-.field-group input,.field-group select{
-  border:1.5px solid var(--gray-200);border-radius:10px;
-  padding:12px 14px;font-size:.92rem;font-family:inherit;
-  color:var(--text);background:white;outline:none;
-  transition:border-color .2s;
-}
-.field-group input:focus,.field-group select:focus{border-color:var(--sky)}
-.field-divider{position:relative;display:flex;align-items:center;justify-content:center}
-.swap-btn{
-  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  width:32px;height:32px;border-radius:50%;
-  background:var(--sky);border:2.5px solid white;
-  color:white;font-size:.85rem;
-  display:flex;align-items:center;justify-content:center;
-  cursor:pointer;transition:.2s;z-index:1;
-}
-.swap-btn:hover{background:var(--sky-dark);transform:translate(-50%,-50%) rotate(180deg)}
-.btn-search{
-  background:var(--sky);color:white;border:none;
-  border-radius:12px;height:50px;width:52px;
-  font-size:1.2rem;transition:.2s;flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;
-}
-.btn-search:hover{background:var(--sky-dark);transform:translateY(-2px)}
+.booking-top{display:flex;justify-content:space-between;gap:18px;align-items:center;margin-bottom:22px;flex-wrap:wrap}
+.trip-tabs{display:flex;background:#eef4fb;border-radius:999px;padding:5px;gap:4px}
+.trip-tabs button{border:0;background:transparent;color:#526276;border-radius:999px;padding:9px 18px;font-weight:800;font-size:.88rem}
+.trip-tabs button.active{background:var(--navy);color:#fff}
+.booking-note{display:flex;gap:8px;color:#4b6178;font-size:.88rem;font-weight:700}
+.booking-note::before{content:"";width:9px;height:9px;border-radius:50%;background:#31d0a7;margin-top:5px}
+.booking-fields{display:grid;grid-template-columns:1.2fr 1.2fr .95fr 1.1fr auto;gap:12px;align-items:end}
+.field{display:grid;gap:7px}
+.field label{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:#748398;font-weight:900}
+.field input,.field select{width:100%;border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:14px;padding:14px 14px;outline:0;transition:.2s;min-height:52px}
+.field input:focus,.field select:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(18,102,214,.1)}
+.search-btn{border:0;border-radius:16px;height:52px;padding:0 24px;background:linear-gradient(135deg,var(--blue),#13b8ef);color:#fff;font-weight:900;box-shadow:0 18px 42px rgba(18,102,214,.28);transition:.2s}
+.search-btn:hover{transform:translateY(-2px);box-shadow:0 22px 52px rgba(18,102,214,.34)}
 
-/* ── TRUST BAR ── */
-.trust-bar{background:var(--sky-pale);padding:18px 48px;display:flex;align-items:center;justify-content:center;gap:48px;flex-wrap:wrap}
-.trust-item{display:flex;align-items:center;gap:10px;font-size:.88rem;font-weight:500;color:var(--sky-dark)}
-.trust-icon{width:36px;height:36px;border-radius:50%;background:var(--sky);color:white;display:flex;align-items:center;justify-content:center;font-size:.95rem}
+.trust-band{padding:38px 0 20px;background:#fff}
+.trust-grid{display:grid;grid-template-columns:1.2fr repeat(4,1fr);gap:16px;align-items:stretch}
+.trust-photo{position:relative;border-radius:20px;overflow:hidden;min-height:170px;box-shadow:var(--shadow-md)}
+.trust-photo img{width:100%;height:100%;object-fit:cover}
+.trust-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,29,61,.74),rgba(8,29,61,.05))}
+.trust-photo span{position:absolute;left:20px;bottom:18px;right:20px;color:#fff;font-weight:900;font-size:1.05rem;z-index:2}
+.trust-item{border:1px solid var(--line);border-radius:18px;padding:20px;background:#fff;box-shadow:var(--shadow-sm);display:grid;align-content:center;gap:8px}
+.trust-item b{font-size:1.55rem;color:var(--navy);font-family:"Playfair Display",Georgia,serif}
+.trust-item span{color:var(--muted);font-size:.88rem;line-height:1.45}
 
-/* ── SECTION COMMON ── */
-.section{padding:88px 48px}
-.section-tag{font-size:.78rem;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:var(--sky);margin-bottom:10px}
-.section-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.6rem);font-weight:700;color:var(--text);line-height:1.2;margin-bottom:14px}
-.section-sub{font-size:1rem;color:var(--gray-600);max-width:520px;line-height:1.7}
+.deals{background:linear-gradient(180deg,#f7f9fc,#fff)}
+.section-head{display:flex;justify-content:space-between;gap:24px;align-items:end;margin-bottom:34px}
+.text-link{font-weight:900;color:var(--blue);border:1px solid #cfe1f8;border-radius:999px;padding:11px 18px;background:#fff;box-shadow:var(--shadow-sm)}
+.deal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.deal-card{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:var(--shadow-sm);transition:.28s}
+.deal-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-md)}
+.deal-image{height:225px;position:relative;overflow:hidden}
+.deal-image img{width:100%;height:100%;object-fit:cover;transition:.45s}
+.deal-card:hover .deal-image img{transform:scale(1.07)}
+.deal-image::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,29,61,.04),rgba(8,29,61,.62))}
+.deal-badge{position:absolute;top:14px;left:14px;z-index:2;border-radius:999px;background:rgba(255,255,255,.92);color:var(--navy);padding:7px 12px;font-size:.75rem;font-weight:900}
+.deal-body{padding:20px}
+.route{display:flex;justify-content:space-between;gap:14px;align-items:center;font-weight:900;color:var(--ink);margin-bottom:10px}
+.route i{width:30px;height:1px;background:#b6c7d9;position:relative;flex:1}
+.route i::after{content:"";position:absolute;right:0;top:-3px;width:7px;height:7px;border-top:2px solid #b6c7d9;border-right:2px solid #b6c7d9;transform:rotate(45deg)}
+.deal-body p{color:var(--muted);line-height:1.65;font-size:.92rem;margin-bottom:18px}
+.deal-foot{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.price{font-size:1.32rem;font-weight:900;color:var(--blue)}
+.price small{display:block;font-size:.74rem;font-weight:700;color:#8794a5}
+.small-btn{border:0;border-radius:999px;background:#eef6ff;color:var(--blue);font-weight:900;padding:10px 15px;transition:.2s}
+.small-btn:hover{background:var(--blue);color:#fff}
 
-/* ── DEALS ── */
-.deals-section{background:var(--off-white)}
-.deals-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:40px;flex-wrap:wrap;gap:16px}
-.deals-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-.deal-card{
-  background:white;border-radius:var(--r);box-shadow:var(--shadow-sm);
-  overflow:hidden;transition:.25s;
-  display:flex;flex-direction:column;
-}
-.deal-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-md)}
-.deal-img{position:relative;height:190px;overflow:hidden}
-.deal-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
-.deal-card:hover .deal-img img{transform:scale(1.06)}
-.deal-badge{
-  position:absolute;top:14px;left:14px;
-  background:var(--sky);color:white;
-  font-size:.72rem;font-weight:700;letter-spacing:.5px;
-  padding:5px 12px;border-radius:50px;text-transform:uppercase;
-}
-.deal-badge.green{background:#16a34a}
-.deal-body{padding:18px 20px;flex:1;display:flex;flex-direction:column}
-.deal-route{display:flex;align-items:center;gap:8px;margin-bottom:6px}
-.deal-city{font-size:1rem;font-weight:600;color:var(--text)}
-.deal-arrow{color:var(--sky);font-size:.9rem}
-.deal-desc{font-size:.85rem;color:var(--gray-600);line-height:1.6;flex:1;margin-bottom:14px}
-.deal-footer{display:flex;align-items:center;justify-content:space-between}
-.deal-price{font-size:1.3rem;font-weight:700;color:var(--sky-dark)}
-.deal-price small{font-size:.75rem;font-weight:400;color:var(--gray-400)}
-.btn-deal{background:var(--sky-pale);color:var(--sky);border:none;border-radius:50px;padding:8px 18px;font-size:.82rem;font-weight:600;transition:.2s}
-.btn-deal:hover{background:var(--sky);color:white}
-.view-all{display:inline-flex;align-items:center;gap:6px;color:var(--sky);font-size:.9rem;font-weight:600;border:1.5px solid var(--sky);border-radius:50px;padding:10px 22px;transition:.2s}
-.view-all:hover{background:var(--sky);color:white}
+.destinations{background:#fff}
+.destination-layout{display:grid;grid-template-columns:.78fr 1.22fr;gap:28px;align-items:stretch}
+.destination-feature{position:relative;border-radius:24px;overflow:hidden;min-height:610px;color:#fff;box-shadow:var(--shadow-lg)}
+.destination-feature img{width:100%;height:100%;object-fit:cover}
+.destination-feature::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,20,45,.05),rgba(5,20,45,.82))}
+.feature-copy{position:absolute;left:28px;right:28px;bottom:28px;z-index:2}
+.feature-copy h3{font-family:"Playfair Display",Georgia,serif;font-size:2.35rem;line-height:1;margin-bottom:10px}
+.feature-copy p{color:rgba(255,255,255,.78);line-height:1.7}
+.package-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.package-card{position:relative;min-height:295px;border-radius:22px;overflow:hidden;color:#fff;box-shadow:var(--shadow-sm);isolation:isolate}
+.package-card img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;transition:.45s}
+.package-card:hover img{transform:scale(1.06)}
+.package-card::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,20,45,.08),rgba(5,20,45,.78));z-index:1}
+.package-copy{position:absolute;left:20px;right:20px;bottom:20px;z-index:2}
+.pill{display:inline-flex;border-radius:999px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.24);backdrop-filter:blur(10px);padding:6px 10px;font-size:.72rem;font-weight:900;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}
+.package-copy h3{font-family:"Playfair Display",Georgia,serif;font-size:1.45rem;margin-bottom:5px}
+.package-copy p{font-size:.86rem;color:rgba(255,255,255,.78)}
 
-/* ── DESTINATIONS ── */
-.dest-section{background:white}
-.dest-tabs{display:flex;gap:8px;margin-bottom:36px;flex-wrap:wrap}
-.dest-tab{background:var(--gray-100);color:var(--gray-600);border:none;border-radius:50px;padding:8px 20px;font-size:.85rem;font-weight:500;transition:.2s}
-.dest-tab.active{background:var(--sky);color:white}
-.dest-tab:hover{background:var(--sky);color:white}
-.dest-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-.dest-card{position:relative;border-radius:var(--r);overflow:hidden;cursor:pointer;aspect-ratio:.82}
-.dest-card img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
-.dest-card:hover img{transform:scale(1.08)}
-.dest-overlay{
-  position:absolute;inset:0;
-  background:linear-gradient(to top, rgba(10,20,50,.85) 0%, transparent 55%);
-  transition:.3s;
-}
-.dest-card:hover .dest-overlay{background:linear-gradient(to top,rgba(10,20,50,.92) 0%,rgba(10,20,50,.1) 60%)}
-.dest-info{position:absolute;bottom:0;left:0;right:0;padding:20px 18px;color:white}
-.dest-tag{font-size:.7rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;opacity:.8;margin-bottom:5px}
-.dest-name{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;margin-bottom:4px}
-.dest-from{font-size:.8rem;opacity:.75}
-.dest-pill{
-  display:inline-flex;align-items:center;gap:5px;
-  background:rgba(255,255,255,.15);backdrop-filter:blur(4px);
-  border:1px solid rgba(255,255,255,.25);
-  border-radius:50px;padding:3px 10px;
-  font-size:.7rem;margin-bottom:8px;
-}
-.dest-arrow{
-  position:absolute;top:16px;right:16px;
-  width:34px;height:34px;border-radius:50%;
-  background:rgba(255,255,255,.15);backdrop-filter:blur(6px);
-  display:flex;align-items:center;justify-content:center;
-  color:white;font-size:.9rem;
-  opacity:0;transition:.3s;
-}
-.dest-card:hover .dest-arrow{opacity:1}
+.experience{position:relative;background:#071629;color:#fff;overflow:hidden}
+.experience::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 18% 12%,rgba(50,184,255,.24),transparent 32%),radial-gradient(circle at 85% 70%,rgba(215,173,93,.16),transparent 30%)}
+.experience .container{position:relative;z-index:2}
+.experience .eyebrow{color:#8adfff}
+.experience .section-title{color:#fff}
+.experience .section-copy{color:rgba(255,255,255,.68)}
+.cabin-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;margin-top:38px}
+.cabin-card{border-radius:24px;overflow:hidden;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);box-shadow:0 28px 80px rgba(0,0,0,.22);transition:.28s}
+.cabin-card:hover{transform:translateY(-6px);background:rgba(255,255,255,.09)}
+.cabin-card.large{grid-row:span 2}
+.cabin-img{height:320px;overflow:hidden}
+.cabin-card.large .cabin-img{height:470px}
+.cabin-img img{width:100%;height:100%;object-fit:cover;transition:.45s}
+.cabin-card:hover .cabin-img img{transform:scale(1.045)}
+.cabin-body{padding:24px}
+.cabin-body h3{font-family:"Playfair Display",Georgia,serif;font-size:1.7rem;margin-bottom:10px}
+.cabin-body p{color:rgba(255,255,255,.7);line-height:1.7;font-size:.95rem}
 
-/* ── PREMIUM EXPERIENCE ── */
-.premium-section{background:var(--sky-dark);color:white;padding:88px 48px}
-.premium-header{text-align:center;margin-bottom:56px}
-.premium-header .section-tag{color:var(--accent)}
-.premium-header .section-title{color:white}
-.premium-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.prem-card{
-  background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.1);
-  border-radius:var(--r);overflow:hidden;transition:.25s;
-}
-.prem-card:hover{background:rgba(255,255,255,.11);transform:translateY(-4px)}
-.prem-img{height:200px;overflow:hidden}
-.prem-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
-.prem-card:hover .prem-img img{transform:scale(1.05)}
-.prem-body{padding:22px}
-.prem-icon{font-size:1.5rem;margin-bottom:10px}
-.prem-title{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;margin-bottom:8px}
-.prem-desc{font-size:.88rem;color:rgba(255,255,255,.7);line-height:1.65}
+.story{background:linear-gradient(180deg,#fff,#f7f9fc)}
+.story-layout{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
+.story-collage{display:grid;grid-template-columns:1fr .82fr;grid-template-rows:230px 230px;gap:16px}
+.story-collage figure{border-radius:22px;overflow:hidden;box-shadow:var(--shadow-md);position:relative}
+.story-collage figure:first-child{grid-row:1/3}
+.story-collage img{width:100%;height:100%;object-fit:cover}
+.story-card{padding:30px;border:1px solid var(--line);border-radius:24px;background:#fff;box-shadow:var(--shadow-sm);margin-top:26px}
+.story-card strong{display:block;font-size:1.05rem;margin-bottom:8px;color:var(--navy)}
+.story-card p{color:var(--muted);line-height:1.75}
 
-/* ── STATS ── */
-.stats-section{background:var(--sky);padding:56px 48px}
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);text-align:center;gap:24px}
-.stat-num{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:700;color:white;line-height:1}
-.stat-label{font-size:.85rem;color:rgba(255,255,255,.75);margin-top:6px;font-weight:500}
+.faq{background:#fff}
+.faq-layout{display:grid;grid-template-columns:.75fr 1.25fr;gap:42px;align-items:start}
+.faq-side{position:sticky;top:92px}
+.faq-side-img{margin-top:24px;border-radius:24px;overflow:hidden;box-shadow:var(--shadow-md);height:250px}
+.faq-side-img img{width:100%;height:100%;object-fit:cover}
+.faq-list{display:grid;gap:12px}
+.faq-item{border:1px solid var(--line);border-radius:16px;background:#fff;overflow:hidden;box-shadow:var(--shadow-sm)}
+.faq-question{width:100%;display:flex;justify-content:space-between;align-items:center;gap:18px;border:0;background:#fff;color:var(--ink);padding:20px;font-weight:900;text-align:left}
+.faq-question span{width:28px;height:28px;border-radius:50%;background:#eef6ff;color:var(--blue);display:grid;place-items:center;flex:0 0 auto}
+.faq-answer{max-height:0;overflow:hidden;color:var(--muted);line-height:1.7;padding:0 20px;transition:.3s}
+.faq-item.open .faq-answer{max-height:180px;padding:0 20px 20px}
+.faq-item.open .faq-question span{background:var(--blue);color:#fff;transform:rotate(45deg)}
 
-/* ── FAQ ── */
-.faq-section{background:var(--off-white)}
-.faq-wrap{max-width:780px;margin:0 auto}
-.faq-layout{display:grid;grid-template-columns:1fr 2fr;gap:64px;align-items:start}
-.faq-list{display:flex;flex-direction:column;gap:12px}
-.faq-item{
-  background:white;border-radius:var(--r-sm);
-  border:1.5px solid var(--gray-200);overflow:hidden;
-  transition:.2s;
-}
-.faq-item.open{border-color:var(--sky)}
-.faq-question{
-  width:100%;text-align:left;background:none;border:none;
-  padding:18px 20px;font-size:.93rem;font-weight:600;color:var(--text);
-  display:flex;justify-content:space-between;align-items:center;gap:12px;
-  cursor:pointer;
-}
-.faq-icon{
-  width:26px;height:26px;border-radius:50%;background:var(--sky-pale);
-  color:var(--sky);display:flex;align-items:center;justify-content:center;
-  font-size:.75rem;flex-shrink:0;transition:.3s;
-}
-.faq-item.open .faq-icon{background:var(--sky);color:white;transform:rotate(180deg)}
-.faq-answer{
-  max-height:0;overflow:hidden;transition:max-height .35s ease,padding .2s;
-  padding:0 20px;font-size:.88rem;color:var(--gray-600);line-height:1.7;
-}
-.faq-item.open .faq-answer{max-height:200px;padding:0 20px 18px}
+.closing-cta{position:relative;overflow:hidden;color:#fff;padding:72px 0;background:#071629}
+.closing-cta img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.48}
+.closing-cta::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,22,41,.92),rgba(7,22,41,.42))}
+.closing-inner{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;gap:28px}
+.closing-inner h2{font-family:"Playfair Display",Georgia,serif;font-size:clamp(2rem,4vw,3.5rem);line-height:1.05}
+.closing-inner p{max-width:520px;color:rgba(255,255,255,.76);line-height:1.75;margin-top:12px}
 
-/* ── FOOTER ── */
-footer{background:#0a1628;color:rgba(255,255,255,.7);padding:64px 48px 32px}
-.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1.4fr;gap:40px;margin-bottom:48px}
-.footer-brand .nav-logo-text{color:white;font-size:1.5rem}
-.footer-brand p{font-size:.88rem;line-height:1.7;margin:14px 0 20px;max-width:260px}
-.social-links{display:flex;gap:10px}
-.social-link{
-  width:36px;height:36px;border-radius:50%;
-  background:rgba(255,255,255,.1);
-  display:flex;align-items:center;justify-content:center;
-  font-size:.85rem;transition:.2s;
-  color:rgba(255,255,255,.7);
-}
-.social-link:hover{background:var(--sky);color:white}
-.footer-col h4{font-size:.85rem;font-weight:700;color:white;letter-spacing:.8px;text-transform:uppercase;margin-bottom:18px}
-.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
-.footer-col ul li a{font-size:.87rem;color:rgba(255,255,255,.6);transition:.2s}
-.footer-col ul li a:hover{color:white}
-.footer-newsletter input{
-  width:100%;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.12);
-  border-radius:10px;padding:12px 14px;color:white;font-size:.88rem;
-  font-family:inherit;outline:none;margin-bottom:10px;
-}
-.footer-newsletter input::placeholder{color:rgba(255,255,255,.4)}
-.footer-newsletter input:focus{border-color:var(--sky)}
-.btn-subscribe{width:100%;background:var(--sky);color:white;border:none;border-radius:10px;padding:12px;font-size:.88rem;font-weight:600;transition:.2s}
-.btn-subscribe:hover{background:var(--sky-light)}
-.footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
-.footer-bottom p{font-size:.82rem}
-.footer-badges{display:flex;gap:12px}
-.badge{background:rgba(255,255,255,.07);border-radius:6px;padding:6px 12px;font-size:.75rem;color:rgba(255,255,255,.55)}
+footer{background:#07101f;color:rgba(255,255,255,.68);padding:58px 0 28px}
+.footer-grid{display:grid;grid-template-columns:1.45fr repeat(3,1fr);gap:34px;margin-bottom:34px}
+.footer-brand{display:grid;gap:14px}
+.footer-logo{display:flex;align-items:center;gap:12px;color:#fff}
+.footer-logo img{width:44px;height:44px;border-radius:12px;object-fit:cover}
+.footer-logo span{font-family:"Playfair Display",Georgia,serif;font-size:1.5rem;font-weight:700}
+.footer-brand p{max-width:340px;line-height:1.7}
+.footer-col h4{color:#fff;font-size:.83rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:16px}
+.footer-col ul{list-style:none;display:grid;gap:10px}
+.footer-col a{color:rgba(255,255,255,.62)}
+.newsletter{display:grid;gap:10px}
+.newsletter input{border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.07);color:#fff;border-radius:12px;padding:13px 14px;outline:0}
+.newsletter input::placeholder{color:rgba(255,255,255,.38)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.09);padding-top:22px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:.85rem}
 
-/* ── RESPONSIVE ── */
-@media(max-width:1024px){
-  .booking-fields{grid-template-columns:1fr 1fr 1fr;gap:10px}
-  .deals-grid{grid-template-columns:repeat(2,1fr)}
-  .dest-grid{grid-template-columns:repeat(2,1fr)}
-  .premium-grid{grid-template-columns:repeat(2,1fr)}
+@media(max-width:1020px){
+  .nav-links,.nav-actions{display:none}
+  .menu-btn{display:block}
+  .hero-grid,.destination-layout,.story-layout,.faq-layout{grid-template-columns:1fr}
+  .hero-card{display:none}
+  .booking-fields{grid-template-columns:1fr 1fr}
+  .trust-grid{grid-template-columns:1fr 1fr}
+  .trust-photo{grid-column:1/-1}
+  .deal-grid{grid-template-columns:1fr 1fr}
+  .cabin-grid{grid-template-columns:1fr}
+  .cabin-card.large{grid-row:auto}
   .footer-grid{grid-template-columns:1fr 1fr}
 }
-@media(max-width:768px){
-  .navbar{padding:0 20px}
-  .nav-links,.nav-right{display:none}
-  .hamburger{display:flex}
-  .section{padding:64px 20px}
-  .deals-grid{grid-template-columns:1fr}
-  .dest-grid{grid-template-columns:1fr 1fr}
-  .premium-grid{grid-template-columns:1fr}
-  .stats-grid{grid-template-columns:repeat(2,1fr)}
-  .faq-layout{grid-template-columns:1fr}
-  .footer-grid{grid-template-columns:1fr}
-  .trust-bar{padding:18px 20px;gap:20px}
-  .booking-card{padding:20px 16px}
-  .booking-fields{grid-template-columns:1fr 1fr;gap:10px}
-  .booking-fields .btn-search{width:100%;height:48px}
-  .hero-content{padding-top:50px}
-  footer{padding:48px 20px 24px}
+@media(max-width:720px){
+  .container,.nav-inner{width:min(100% - 32px,1180px)}
+  .section{padding:70px 0}
+  .hero{padding-top:112px;min-height:860px;align-items:flex-start}
+  .hero h1{font-size:clamp(2.75rem,15vw,4.2rem)}
+  .booking-shell{margin-top:-110px}
+  .booking-card{padding:18px;border-radius:20px}
+  .booking-fields,.deal-grid,.package-grid,.trust-grid,.footer-grid{grid-template-columns:1fr}
+  .section-head,.closing-inner{align-items:flex-start;flex-direction:column}
+  .destination-feature{min-height:420px}
+  .story-collage{grid-template-columns:1fr;grid-template-rows:260px 210px 210px}
+  .story-collage figure:first-child{grid-row:auto}
+  .cabin-img,.cabin-card.large .cabin-img{height:280px}
+  .trip-tabs{width:100%;overflow:auto}
+  .footer-bottom{display:grid}
 }
-@media(max-width:480px){
-  .dest-grid{grid-template-columns:1fr}
-  .booking-fields{grid-template-columns:1fr}
-  .deals-header{flex-direction:column;align-items:flex-start}
-}
-
-/* ANIMATION */
-@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-.hero-content>*{animation:fadeUp .7s ease both}
-.hero-badge{animation-delay:.1s}
-.hero-title{animation-delay:.2s}
-.hero-subtitle{animation-delay:.32s}
-.hero-ctas{animation-delay:.44s}
-.booking-card{animation:fadeUp .7s ease .55s both}
 </style>
 </head>
 <body>
-
-<!-- NAVBAR -->
 <nav class="navbar" id="navbar">
-  <div class="nav-logo">
-    <img src="airrlogo.png" alt="SkyFlew logo"/>
-    <span class="nav-logo-text">SkyFlew</span>
+  <div class="nav-inner">
+    <a class="brand" href="#">
+      <img class="brand-mark" src="assets/airrlogo.png" alt="SkyFlew logo" />
+      <span class="brand-name">SkyFlew</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#book">Book</a></li>
+      <li><a href="#deals">Deals</a></li>
+      <li><a href="#destinations">Destinations</a></li>
+      <li><a href="#experience">Cabins</a></li>
+      <li><a href="#faq">Support</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="ghost-btn">Manage Trip</button>
+      <button class="solid-btn">Book Now</button>
+    </div>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu"><span></span><span></span><span></span></button>
   </div>
-  <ul class="nav-links">
-    <li><a href="#">Book</a></li>
-    <li><a href="#">Trips</a></li>
-    <li><a href="#">Check-in</a></li>
-    <li><a href="#deals">Deals &amp; Offers</a></li>
-    <li><a href="#destinations">Destinations</a></li>
-  </ul>
-  <div class="nav-right">
-    <button class="btn-login">Login</button>
-    <button class="btn-book">✈ Booking Now</button>
-  </div>
-  <button class="hamburger" id="hamburger" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
 </nav>
-<div class="mobile-menu" id="mobileMenu">
-  <a href="#">Book</a>
-  <a href="#">Trips</a>
-  <a href="#">Check-in</a>
-  <a href="#deals">Deals &amp; Offers</a>
+<div class="mobile-panel" id="mobilePanel">
+  <a href="#book">Book</a>
+  <a href="#deals">Deals</a>
   <a href="#destinations">Destinations</a>
-  <a href="#">Login</a>
-  <button class="btn-book" style="width:100%;margin-top:4px">✈ Booking Now</button>
+  <a href="#experience">Cabins</a>
+  <a href="#faq">Support</a>
 </div>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-overlay"></div>
-  <div class="hero-content">
-    <div class="hero-badge">Premium Airline Booking</div>
-    <h1 class="hero-title">
-      Find &amp; Book Flights<br/>Quickly. <span>All in One Place.</span>
-    </h1>
-    <p class="hero-subtitle">
-      Can't get places without your airline and book with confidence —
-      domestic &amp; international routes covered.
-    </p>
-    <div class="hero-ctas">
-      <button class="btn-primary">✈ Search Flights</button>
-      <button class="btn-secondary">Explore Deals →</button>
+<header class="hero">
+  <div class="hero-media" id="heroMedia"></div>
+  <div class="container hero-grid">
+    <div class="hero-copy reveal">
+      <div class="hero-kicker">Premium airline booking</div>
+      <h1>Fly higher with journeys that feel effortless.</h1>
+      <p class="hero-lede">Book domestic and international flights with curated fares, refined cabin choices, and human support from takeoff to touchdown.</p>
+      <div class="hero-cta">
+        <a class="solid-btn" href="#book">Search Flights</a>
+        <a class="ghost-btn" href="#destinations">Explore Packages</a>
+      </div>
     </div>
+    <aside class="hero-card reveal">
+      <div class="mini-story">
+        <div class="story-img"><img src="assets/passenger-window.jpg" alt="Passenger looking through an airplane window" /></div>
+        <div>
+          <h3>Window-seat wonder, planned in minutes.</h3>
+          <p>Smart routing and flexible fares help every trip begin with confidence, not comparison fatigue.</p>
+        </div>
+      </div>
+    </aside>
   </div>
+</header>
 
-  <!-- BOOKING WIDGET -->
-  <div class="booking-wrap">
-    <div class="booking-card">
-      <div class="booking-tabs">
-        <button class="booking-tab active">One Way</button>
-        <button class="booking-tab">Round Trip</button>
-        <button class="booking-tab">Multi-City</button>
-      </div>
-      <div class="booking-fields">
-        <div class="field-group" style="position:relative">
-          <label>Journey From</label>
-          <input type="text" placeholder="Leaving from..." value="New Delhi, IND"/>
-          <div class="swap-btn" title="Swap">⇌</div>
+<main>
+  <section class="booking-shell" id="book">
+    <div class="container">
+      <div class="booking-card reveal">
+        <div class="booking-top">
+          <div class="trip-tabs" aria-label="Trip type">
+            <button class="active">One Way</button>
+            <button>Round Trip</button>
+            <button>Multi-City</button>
+          </div>
+          <div class="booking-note">Live fares, secure checkout, no hidden fees</div>
         </div>
-        <div class="field-group">
-          <label>Going To</label>
-          <input type="text" placeholder="Going to..." value="Dubai, UAE"/>
+        <div class="booking-fields">
+          <div class="field">
+            <label>From</label>
+            <input type="text" value="New Delhi, IND" />
+          </div>
+          <div class="field">
+            <label>To</label>
+            <input type="text" value="Dubai, UAE" />
+          </div>
+          <div class="field">
+            <label>Depart</label>
+            <input type="date" value="2026-06-15" />
+          </div>
+          <div class="field">
+            <label>Cabin</label>
+            <select>
+              <option>Economy - 1 passenger</option>
+              <option>Business - 1 passenger</option>
+              <option>First - 1 passenger</option>
+            </select>
+          </div>
+          <button class="search-btn">Search</button>
         </div>
-        <div class="field-group">
-          <label>Date</label>
-          <input type="date" value="2026-06-15"/>
-        </div>
-        <div class="field-group">
-          <label>Class</label>
-          <select>
-            <option>Economy · 1 Passenger</option>
-            <option>Business · 1 Passenger</option>
-            <option>First · 1 Passenger</option>
-            <option>Economy · 2 Passengers</option>
-          </select>
-        </div>
-        <button class="btn-search" title="Search flights">🔍</button>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- TRUST BAR -->
-<div class="trust-bar">
-  <div class="trust-item">
-    <div class="trust-icon">✓</div>
-    No Hidden Fees
-  </div>
-  <div class="trust-item">
-    <div class="trust-icon">🔒</div>
-    Secure Booking
-  </div>
-  <div class="trust-item">
-    <div class="trust-icon">↺</div>
-    Free Cancellation
-  </div>
-  <div class="trust-item">
-    <div class="trust-icon">🌍</div>
-    200+ Destinations
-  </div>
-  <div class="trust-item">
-    <div class="trust-icon">✈</div>
-    50+ Airlines
-  </div>
-</div>
+  <section class="trust-band">
+    <div class="container trust-grid">
+      <div class="trust-photo reveal">
+        <img src="assets/runway-service.jpg" alt="Ground crew guiding an airplane on the runway" />
+        <span>Runway-tested service from booking to boarding.</span>
+      </div>
+      <div class="trust-item reveal"><b>98%</b><span>On-time departure reliability across partner routes.</span></div>
+      <div class="trust-item reveal"><b>24/7</b><span>Flight support for changes, cancellations, and upgrades.</span></div>
+      <div class="trust-item reveal"><b>200+</b><span>Destinations across business, leisure, and long-haul travel.</span></div>
+      <div class="trust-item reveal"><b>SSL</b><span>Encrypted checkout with transparent fare rules.</span></div>
+    </div>
+  </section>
 
-<!-- DEALS -->
-<section class="section deals-section" id="deals">
-  <div class="deals-header">
-    <div>
-      <p class="section-tag">Hot Offers</p>
-      <h2 class="section-title">Cheap Flights on SkyFlew</h2>
-      <p class="section-sub">
-        SkyFlew makes finding and booking cheap flights simple and fast — we offer great deals on
-        <strong>one-way, return, international</strong> and multi-city trips.
-      </p>
-    </div>
-    <a href="#" class="view-all">Explore All →</a>
-  </div>
-  <div class="deals-grid">
-    <div class="deal-card">
-      <div class="deal-img">
-        <img src="pexels-bhuwan-dhingra-152723-452544.jpg" alt="Delhi to Dubai"/>
-        <span class="deal-badge">30% OFF</span>
+  <section class="section deals" id="deals">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <p class="eyebrow">Hot offers</p>
+          <h2 class="section-title">Flights chosen for the way people actually travel.</h2>
+          <p class="section-copy">Each offer pairs a strong fare with an image that sets the right expectation: city access, cabin comfort, and memorable arrival moments.</p>
+        </div>
+        <a class="text-link" href="#book">Compare all fares</a>
       </div>
-      <div class="deal-body">
-        <div class="deal-route">
-          <span class="deal-city">New Delhi</span>
-          <span class="deal-arrow">✈</span>
-          <span class="deal-city">Dubai</span>
-        </div>
-        <p class="deal-desc">Non-stop international flights with premium comfort and great savings on all seat classes.</p>
-        <div class="deal-footer">
-          <div class="deal-price">₹12,499 <small>/ person</small></div>
-          <button class="btn-deal">Book Now</button>
-        </div>
-      </div>
-    </div>
-    <div class="deal-card">
-      <div class="deal-img">
-        <img src="pexels-camcasey-1157255.jpg" alt="Mumbai to London"/>
-        <span class="deal-badge green">BEST VALUE</span>
-      </div>
-      <div class="deal-body">
-        <div class="deal-route">
-          <span class="deal-city">Mumbai</span>
-          <span class="deal-arrow">✈</span>
-          <span class="deal-city">London</span>
-        </div>
-        <p class="deal-desc">Round-trip deal with in-flight meals and extra baggage included. Limited seats available.</p>
-        <div class="deal-footer">
-          <div class="deal-price">₹48,900 <small>/ return</small></div>
-          <button class="btn-deal">Book Now</button>
-        </div>
+      <div class="deal-grid">
+        <article class="deal-card reveal">
+          <div class="deal-image">
+            <img src="assets/city-skyline-plane.jpg" alt="Airplane passing over a city skyline" />
+            <span class="deal-badge">Business route</span>
+          </div>
+          <div class="deal-body">
+            <div class="route"><span>Mumbai</span><i></i><span>London</span></div>
+            <p>For travelers who need city-center access, smooth connections, and flexible return options.</p>
+            <div class="deal-foot"><div class="price">Rs 48,900<small>return fare</small></div><button class="small-btn">Book</button></div>
+          </div>
+        </article>
+        <article class="deal-card reveal">
+          <div class="deal-image">
+            <img src="assets/wing-engine.jpg" alt="Airplane engine and wing at the airport" />
+            <span class="deal-badge">Premium value</span>
+          </div>
+          <div class="deal-body">
+            <div class="route"><span>Delhi</span><i></i><span>Dubai</span></div>
+            <p>Short-haul international travel with lounge add-ons, priority options, and frequent departures.</p>
+            <div class="deal-foot"><div class="price">Rs 12,499<small>one way</small></div><button class="small-btn">Book</button></div>
+          </div>
+        </article>
+        <article class="deal-card reveal">
+          <div class="deal-image">
+            <img src="assets/passenger-window.jpg" alt="Passenger watching clouds from an airplane window" />
+            <span class="deal-badge">Weekend escape</span>
+          </div>
+          <div class="deal-body">
+            <div class="route"><span>Bangalore</span><i></i><span>Singapore</span></div>
+            <p>A compact getaway fare designed for quick departures, cabin baggage, and effortless check-in.</p>
+            <div class="deal-foot"><div class="price">Rs 18,250<small>one way</small></div><button class="small-btn">Book</button></div>
+          </div>
+        </article>
       </div>
     </div>
-    <div class="deal-card">
-      <div class="deal-img">
-        <img src="pexels-jason-toevs-1047869-2033343_1.jpg" alt="Bangalore to Singapore"/>
-        <span class="deal-badge">ONE WAY</span>
-      </div>
-      <div class="deal-body">
-        <div class="deal-route">
-          <span class="deal-city">Bangalore</span>
-          <span class="deal-arrow">✈</span>
-          <span class="deal-city">Singapore</span>
-        </div>
-        <p class="deal-desc">Direct flights from Bangalore to Singapore every day with free check-in baggage up to 25kg.</p>
-        <div class="deal-footer">
-          <div class="deal-price">₹18,250 <small>/ person</small></div>
-          <button class="btn-deal">Book Now</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- DESTINATIONS -->
-<section class="section dest-section" id="destinations">
-  <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:28px;flex-wrap:wrap;gap:16px">
-    <div>
-      <p class="section-tag">Tour Packages</p>
-      <h2 class="section-title">Our tour package guarantees a<br/>smooth and unforgettable adventure.</h2>
-    </div>
-  </div>
-  <div class="dest-tabs">
-    <button class="dest-tab active">Trekking Adventure</button>
-    <button class="dest-tab">Air Exploration</button>
-    <button class="dest-tab">Cultural Insights Tour</button>
-    <button class="dest-tab">Sunrise View</button>
-  </div>
-  <div class="dest-grid">
-    <div class="dest-card">
-      <img src="pexels-jessbaileydesign-1655985.jpg" alt="Air Exploration"/>
-      <div class="dest-overlay"></div>
-      <div class="dest-arrow">↗</div>
-      <div class="dest-info">
-        <div class="dest-pill">✈ Air Exploration</div>
-        <div class="dest-name">Above the Clouds</div>
-        <div class="dest-from">From ₹8,499 · 3 days</div>
+  <section class="section destinations" id="destinations">
+    <div class="container destination-layout">
+      <article class="destination-feature reveal">
+        <img src="assets/wing-clouds.jpg" alt="Airplane wing flying over ocean and clouds" />
+        <div class="feature-copy">
+          <span class="pill">Air exploration</span>
+          <h3>Journeys that begin above the clouds.</h3>
+          <p>Use the wing-view image as the visual bridge from booking a flight to imagining the trip itself.</p>
+        </div>
+      </article>
+      <div>
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow">Curated packages</p>
+            <h2 class="section-title">A more cinematic way to choose where next.</h2>
+          </div>
+        </div>
+        <div class="package-grid">
+          <article class="package-card reveal">
+            <img src="assets/europe-lucerne.jpg" alt="Lucerne waterfront in Europe" />
+            <div class="package-copy"><span class="pill">Europe classic</span><h3>Lucerne Escape</h3><p>7 days from Rs 64,000</p></div>
+          </article>
+          <article class="package-card reveal">
+            <img src="assets/alpine-lake.jpg" alt="Alpine lake and castle scenery" />
+            <div class="package-copy"><span class="pill">Lake retreat</span><h3>Swiss Riviera</h3><p>5 days from Rs 58,500</p></div>
+          </article>
+          <article class="package-card reveal">
+            <img src="assets/tropical-sunset.jpg" alt="Tropical palm trees at sunset" />
+            <div class="package-copy"><span class="pill">Beach break</span><h3>Island Evenings</h3><p>4 days from Rs 31,900</p></div>
+          </article>
+          <article class="package-card reveal">
+            <img src="assets/city-skyline-plane.jpg" alt="Aircraft over downtown skyline" />
+            <div class="package-copy"><span class="pill">Urban arrival</span><h3>Global Cities</h3><p>3 days from Rs 24,700</p></div>
+          </article>
+        </div>
       </div>
     </div>
-    <div class="dest-card">
-      <img src="pexels-bhuwan-dhingra-152723-452544.jpg" alt="Cultural Insights Tour"/>
-      <div class="dest-overlay"></div>
-      <div class="dest-arrow">↗</div>
-      <div class="dest-info">
-        <div class="dest-pill">🏛 Cultural Insights</div>
-        <div class="dest-name">Lucerne, Switzerland</div>
-        <div class="dest-from">From ₹64,000 · 7 days</div>
-      </div>
-    </div>
-    <div class="dest-card">
-      <img src="pexels-jason-toevs-1047869-2033343_1.jpg" alt="Sunrise View"/>
-      <div class="dest-overlay"></div>
-      <div class="dest-arrow">↗</div>
-      <div class="dest-info">
-        <div class="dest-pill">🌅 Sunrise View</div>
-        <div class="dest-name">City Skyline Flight</div>
-        <div class="dest-from">From ₹22,000 · 4 days</div>
-      </div>
-    </div>
-    <div class="dest-card">
-      <img src="pexels-camcasey-1157255.jpg" alt="Weekend Getaway"/>
-      <div class="dest-overlay"></div>
-      <div class="dest-arrow">↗</div>
-      <div class="dest-info">
-        <div class="dest-pill">🏖 Weekend Getaway</div>
-        <div class="dest-name">Coastal Escape</div>
-        <div class="dest-from">From ₹14,500 · 2 days</div>
-      </div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- PREMIUM EXPERIENCE -->
-<section class="premium-section">
-  <div class="premium-header">
-    <p class="section-tag">Why Choose SkyFlew</p>
-    <h2 class="section-title">Your primary flight deals<br/>begin to feel left out.</h2>
-  </div>
-  <div class="premium-grid">
-    <div class="prem-card">
-      <div class="prem-img">
-        <img src="airseet3.png" alt="First Class Cabin"/>
+  <section class="section experience" id="experience">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <p class="eyebrow">Cabin experience</p>
+          <h2 class="section-title">Choose comfort that matches the purpose of the trip.</h2>
+          <p class="section-copy">Premium cabin imagery is reserved for luxury conversion moments, while economy comfort remains clean, practical, and reassuring.</p>
+        </div>
       </div>
-      <div class="prem-body">
-        <div class="prem-icon">👑</div>
-        <div class="prem-title">First Class Comfort</div>
-        <div class="prem-desc">Sink into plush lie-flat seats with personal screens, gourmet meals, and dedicated cabin service.</div>
-      </div>
-    </div>
-    <div class="prem-card">
-      <div class="prem-img">
-        <img src="airseet2.png" alt="Economy Seats"/>
-      </div>
-      <div class="prem-body">
-        <div class="prem-icon">💺</div>
-        <div class="prem-title">Economy Excellence</div>
-        <div class="prem-desc">Modern seat-back entertainment, extra legroom options, and complimentary snacks on every route.</div>
+      <div class="cabin-grid">
+        <article class="cabin-card large reveal">
+          <div class="cabin-img"><img src="assets/first-class.png" alt="Luxury first class cabin" /></div>
+          <div class="cabin-body"><h3>First Class calm</h3><p>Private space, warm materials, lie-flat rest, and elevated service for long-haul travelers.</p></div>
+        </article>
+        <article class="cabin-card reveal">
+          <div class="cabin-img"><img src="assets/economy-seat.png" alt="Comfortable economy airline seats" /></div>
+          <div class="cabin-body"><h3>Economy comfort</h3><p>Modern seating, clear fare choices, and practical upgrades without losing value.</p></div>
+        </article>
+        <article class="cabin-card reveal">
+          <div class="cabin-img"><img src="assets/runway-service.jpg" alt="Airport runway service and aircraft" /></div>
+          <div class="cabin-body"><h3>Operational trust</h3><p>Safety, ground coordination, and punctual operations made visible where trust matters most.</p></div>
+        </article>
       </div>
     </div>
-    <div class="prem-card">
-      <div class="prem-img">
-        <img src="pexels-joerg-mangelsen-337913024-30756520.jpg" alt="On-ground service"/>
-      </div>
-      <div class="prem-body">
-        <div class="prem-icon">🛡️</div>
-        <div class="prem-title">Safety & Reliability</div>
-        <div class="prem-desc">Industry-leading safety checks, punctual departures, and 24/7 ground crew support at every airport.</div>
-      </div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- STATS -->
-<div class="stats-section">
-  <div class="stats-grid">
-    <div>
-      <div class="stat-num">12M+</div>
-      <div class="stat-label">Passengers Flown</div>
+  <section class="section story">
+    <div class="container story-layout">
+      <div class="story-copy reveal">
+        <p class="eyebrow">Travel storytelling</p>
+        <h2 class="section-title">The booking should already feel like the beginning of the journey.</h2>
+        <p class="section-copy">SkyFlew now uses emotional aviation imagery only where it strengthens decision making: the window-seat moment, the cabin promise, and the destination payoff.</p>
+        <div class="story-card">
+          <strong>Designed for conversion without clutter.</strong>
+          <p>Large images carry the mood, compact cards carry prices, and trust imagery supports reliability claims without competing with the booking widget.</p>
+        </div>
+      </div>
+      <div class="story-collage reveal">
+        <figure><img src="assets/passenger-window.jpg" alt="Passenger viewing clouds from an airplane window" /></figure>
+        <figure><img src="assets/wing-engine.jpg" alt="Airport wing and engine view" /></figure>
+        <figure><img src="assets/europe-lucerne.jpg" alt="European waterfront travel destination" /></figure>
+      </div>
     </div>
-    <div>
-      <div class="stat-num">200+</div>
-      <div class="stat-label">Global Destinations</div>
-    </div>
-    <div>
-      <div class="stat-num">98%</div>
-      <div class="stat-label">On-Time Departure</div>
-    </div>
-    <div>
-      <div class="stat-num">4.9★</div>
-      <div class="stat-label">Average Rating</div>
-    </div>
-  </div>
-</div>
+  </section>
 
-<!-- FAQ -->
-<section class="section faq-section" id="faq">
-  <div class="faq-layout">
-    <div>
-      <p class="section-tag">Help Center</p>
-      <h2 class="section-title">Frequently Asked</h2>
-      <p class="section-sub" style="margin-top:10px">This guide explains how SkyFlew meets your daily flight needs.</p>
-    </div>
-    <div class="faq-list">
-      <div class="faq-item open">
-        <button class="faq-question">
-          How do I book a flight on SkyFlew?
-          <span class="faq-icon">▼</span>
-        </button>
-        <div class="faq-answer">
-          Simply enter your origin, destination, travel dates, and passenger count in the search widget, then click Search. Browse results, select your preferred flight, and complete payment in a few clicks. A confirmation will be sent to your email instantly.
+  <section class="section faq" id="faq">
+    <div class="container faq-layout">
+      <aside class="faq-side reveal">
+        <p class="eyebrow">Help center</p>
+        <h2 class="section-title">Answers before you fly.</h2>
+        <p class="section-copy">Support content sits beside a service image, reinforcing that assistance continues after checkout.</p>
+        <div class="faq-side-img"><img src="assets/wing-engine.jpg" alt="Aircraft wing and engine during boarding" /></div>
+      </aside>
+      <div class="faq-list reveal">
+        <div class="faq-item open">
+          <button class="faq-question">How do I book a flight on SkyFlew?<span>+</span></button>
+          <div class="faq-answer">Enter origin, destination, travel date, and cabin class in the search widget. Choose a fare, review rules, and complete secure checkout.</div>
         </div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-question">
-          What is the free baggage allowance?
-          <span class="faq-icon">▼</span>
-        </button>
-        <div class="faq-answer">
-          Economy passengers get 15kg check-in and 7kg cabin baggage. Business Class passengers receive 30kg check-in and 10kg cabin allowance. Additional baggage can be purchased during booking at a discounted rate.
+        <div class="faq-item">
+          <button class="faq-question">Can I change or cancel my booking?<span>+</span></button>
+          <div class="faq-answer">Yes. Eligible bookings can be changed or cancelled from Manage Trip. Fare conditions are shown before payment so there are no surprises.</div>
         </div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-question">
-          Can I cancel or modify my booking?
-          <span class="faq-icon">▼</span>
-        </button>
-        <div class="faq-answer">
-          Yes. Bookings can be cancelled or modified up to 24 hours before departure. Refunds are processed within 5–7 business days depending on your payment method. Some promotional fares may be non-refundable.
+        <div class="faq-item">
+          <button class="faq-question">What cabin classes are available?<span>+</span></button>
+          <div class="faq-answer">SkyFlew supports Economy, Business, and First Class fares, including upgrade options when partner airlines make them available.</div>
         </div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-question">
-          How early should I check in online?
-          <span class="faq-icon">▼</span>
-        </button>
-        <div class="faq-answer">
-          Online check-in opens 48 hours and closes 1 hour before departure for domestic flights, and 24 hours before for international routes. We recommend checking in as early as possible to secure preferred seats.
-        </div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-question">
-          Is my payment information secure?
-          <span class="faq-icon">▼</span>
-        </button>
-        <div class="faq-answer">
-          Absolutely. All payments are processed through 256-bit SSL encryption. We are PCI-DSS compliant and never store your card details. You can pay via credit/debit card, UPI, net banking, or wallets.
-        </div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-question">
-          How do I contact SkyFlew customer support?
-          <span class="faq-icon">▼</span>
-        </button>
-        <div class="faq-answer">
-          Our support team is available 24/7 via live chat on the website, email at support@skyflew.com, or by calling our toll-free number 1800-SKY-FLEW. Average response time is under 5 minutes.
+        <div class="faq-item">
+          <button class="faq-question">Is payment secure?<span>+</span></button>
+          <div class="faq-answer">Payments use encrypted checkout and verified providers. Confirmation and ticket details are sent to your email immediately after booking.</div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- FOOTER -->
+  <section class="closing-cta">
+    <img src="assets/tropical-sunset.jpg" alt="Tropical sunset with palms" />
+    <div class="container closing-inner reveal">
+      <div>
+        <h2>Ready when your next destination is.</h2>
+        <p>Search premium fares, compare cabin experiences, and move from idea to itinerary in one clean flow.</p>
+      </div>
+      <a class="solid-btn" href="#book">Start Booking</a>
+    </div>
+  </section>
+</main>
+
 <footer>
-  <div class="footer-grid">
-    <div class="footer-brand">
-      <div class="nav-logo" style="margin-bottom:4px">
-        <img src="airrlogo.png" alt="SkyFlew" style="height:38px;filter:brightness(0) invert(1)"/>
-        <span class="nav-logo-text">SkyFlew</span>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo"><img src="assets/airrlogo.png" alt="SkyFlew logo" /><span>SkyFlew</span></div>
+        <p>Premium airline booking for travelers who value clarity, comfort, and beautifully planned journeys.</p>
       </div>
-      <p>Your trusted partner for affordable and premium air travel. Domestic and international routes, all in one seamless platform.</p>
-      <div class="social-links">
-        <a class="social-link" href="#" title="Twitter">𝕏</a>
-        <a class="social-link" href="#" title="Facebook">f</a>
-        <a class="social-link" href="#" title="Instagram">◉</a>
-        <a class="social-link" href="#" title="LinkedIn">in</a>
+      <div class="footer-col">
+        <h4>Fly</h4>
+        <ul><li><a href="#book">Book a Flight</a></li><li><a href="#deals">Deals</a></li><li><a href="#destinations">Packages</a></li><li><a href="#">Flight Status</a></li></ul>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <ul><li><a href="#faq">Help Center</a></li><li><a href="#">Manage Trip</a></li><li><a href="#">Baggage</a></li><li><a href="#">Contact</a></li></ul>
+      </div>
+      <div class="footer-col">
+        <h4>Newsletter</h4>
+        <div class="newsletter">
+          <input type="email" placeholder="Email address" />
+          <button class="solid-btn">Subscribe</button>
+        </div>
       </div>
     </div>
-    <div class="footer-col">
-      <h4>Quick Links</h4>
-      <ul>
-        <li><a href="#">Book a Flight</a></li>
-        <li><a href="#">My Trips</a></li>
-        <li><a href="#">Online Check-in</a></li>
-        <li><a href="#">Deals &amp; Offers</a></li>
-        <li><a href="#">Flight Status</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Company</h4>
-      <ul>
-        <li><a href="#">About SkyFlew</a></li>
-        <li><a href="#">Careers</a></li>
-        <li><a href="#">Press Room</a></li>
-        <li><a href="#">Partner Airlines</a></li>
-        <li><a href="#">Sustainability</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Newsletter</h4>
-      <p style="font-size:.85rem;margin-bottom:14px;color:rgba(255,255,255,.55)">Get exclusive deals and travel tips delivered to your inbox.</p>
-      <div class="footer-newsletter">
-        <input type="email" placeholder="your@email.com"/>
-        <button class="btn-subscribe">Subscribe →</button>
-      </div>
-      <p style="font-size:.75rem;margin-top:10px;color:rgba(255,255,255,.35)">📞 1800-SKY-FLEW &nbsp;·&nbsp; support@skyflew.com</p>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>© 2026 SkyFlew Airlines Pvt. Ltd. All rights reserved.</p>
-    <div class="footer-badges">
-      <span class="badge">Privacy Policy</span>
-      <span class="badge">Terms of Use</span>
-      <span class="badge">Cookie Settings</span>
+    <div class="footer-bottom">
+      <p>Copyright 2026 SkyFlew Airlines Pvt. Ltd. All rights reserved.</p>
+      <p>Privacy Policy &nbsp; Terms of Use &nbsp; Cookie Settings</p>
     </div>
   </div>
 </footer>
 
 <script>
-// Navbar scroll
-const navbar = document.getElementById('navbar');
-window.addEventListener('scroll',()=>{
-  navbar.classList.toggle('scrolled', window.scrollY > 20);
+const navbar=document.getElementById("navbar");
+const heroMedia=document.getElementById("heroMedia");
+const menuBtn=document.getElementById("menuBtn");
+const mobilePanel=document.getElementById("mobilePanel");
+
+window.addEventListener("scroll",()=>{
+  const y=window.scrollY;
+  navbar.classList.toggle("scrolled",y>24);
+  if(heroMedia) heroMedia.style.setProperty("--parallax",`${Math.min(y*.12,70)}px`);
 });
 
-// Mobile menu
-const hamburger = document.getElementById('hamburger');
-const mobileMenu = document.getElementById('mobileMenu');
-hamburger.addEventListener('click',()=>{
-  mobileMenu.classList.toggle('open');
-});
+menuBtn.addEventListener("click",()=>mobilePanel.classList.toggle("open"));
+mobilePanel.querySelectorAll("a").forEach(link=>link.addEventListener("click",()=>mobilePanel.classList.remove("open")));
 
-// Booking tabs
-document.querySelectorAll('.booking-tab').forEach(tab=>{
-  tab.addEventListener('click',function(){
-    document.querySelectorAll('.booking-tab').forEach(t=>t.classList.remove('active'));
-    this.classList.add('active');
+document.querySelectorAll(".trip-tabs button").forEach(button=>{
+  button.addEventListener("click",()=>{
+    document.querySelectorAll(".trip-tabs button").forEach(item=>item.classList.remove("active"));
+    button.classList.add("active");
   });
 });
 
-// Destination tabs
-document.querySelectorAll('.dest-tab').forEach(tab=>{
-  tab.addEventListener('click',function(){
-    document.querySelectorAll('.dest-tab').forEach(t=>t.classList.remove('active'));
-    this.classList.add('active');
+document.querySelectorAll(".faq-question").forEach(button=>{
+  button.addEventListener("click",()=>{
+    const item=button.closest(".faq-item");
+    const wasOpen=item.classList.contains("open");
+    document.querySelectorAll(".faq-item").forEach(row=>row.classList.remove("open"));
+    if(!wasOpen) item.classList.add("open");
   });
 });
 
-// FAQ accordion
-document.querySelectorAll('.faq-question').forEach(btn=>{
-  btn.addEventListener('click',function(){
-    const item = this.closest('.faq-item');
-    const isOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
-    if(!isOpen) item.classList.add('open');
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add("visible");
+      observer.unobserve(entry.target);
+    }
   });
-});
-
-// Swap cities
-document.querySelector('.swap-btn').addEventListener('click',function(){
-  const fields = document.querySelectorAll('.booking-fields input[type="text"]');
-  if(fields.length>=2){
-    const tmp = fields[0].value;
-    fields[0].value = fields[1].value;
-    fields[1].value = tmp;
-  }
-});
+},{threshold:.14});
+document.querySelectorAll(".reveal").forEach(item=>observer.observe(item));
 </script>
 </body>
 </html>
