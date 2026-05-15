@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Book Flights | SkyFlew</title>
+<meta name="description" content="Search SkyFlew flights, compare fares, choose cabin options, and prepare your trip with a clean airline booking experience." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../assets/site.css" />
+</head>
+<body>
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a class="brand" href="../index.html">
+      <img class="brand-mark" src="../assets/airrlogo.png" alt="SkyFlew logo" />
+      <span class="brand-name">SkyFlew</span>
+    </a>
+    <ul class="nav-links">
+      <li><a class="active" href="book.html">Book</a></li>
+      <li><a href="deals.html">Deals</a></li>
+      <li><a href="destinations.html">Destinations</a></li>
+      <li><a href="cabins.html">Cabins</a></li>
+      <li><a href="support.html">Support</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a class="ghost-btn" href="support.html#manage">Manage Trip</a>
+      <a class="solid-btn" href="book.html">Book Now</a>
+    </div>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-panel" id="mobilePanel">
+  <a class="active" href="book.html">Book</a>
+  <a href="deals.html">Deals</a>
+  <a href="destinations.html">Destinations</a>
+  <a href="cabins.html">Cabins</a>
+  <a href="support.html">Support</a>
+</div>
+
+<main>
+  <section class="page-hero">
+    <img src="../assets/airr.png" alt="SkyFlew aircraft flying above clouds" />
+    <div class="container reveal">
+      <span class="page-kicker">Flight booking</span>
+      <h1>Search, compare, and reserve your next SkyFlew journey.</h1>
+      <p>Build an itinerary with clear fares, cabin choices, baggage options, and trip support from the first search to final boarding.</p>
+      <div class="hero-actions">
+        <a class="solid-btn" href="#booking-form">Start Search</a>
+        <a class="ghost-btn" href="deals.html">View Fare Deals</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="quick-strip">
+    <div class="container quick-grid">
+      <div class="quick-card reveal"><b>120+</b><span>domestic and international route options</span></div>
+      <div class="quick-card reveal"><b>3</b><span>cabin families with flexible upgrade paths</span></div>
+      <div class="quick-card reveal"><b>24/7</b><span>digital support for itinerary changes</span></div>
+      <div class="quick-card reveal"><b>15 min</b><span>average time to complete a new booking</span></div>
+    </div>
+  </section>
+
+  <section class="section soft-band" id="booking-form">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <p class="eyebrow">Plan your route</p>
+          <h2 class="section-title">A booking flow made for quick decisions.</h2>
+          <p class="section-copy">Use the form to compare sample fares by route, date, cabin, and passenger count. The UI is ready for a real API later.</p>
+        </div>
+        <div class="trip-tabs" aria-label="Trip type">
+          <button class="active" type="button">Round Trip</button>
+          <button type="button">One Way</button>
+          <button type="button">Multi City</button>
+        </div>
+      </div>
+      <form class="form-panel reveal" data-demo-form>
+        <div class="form-grid">
+          <div class="field">
+            <label for="from">From</label>
+            <input id="from" name="from" value="Delhi" required />
+          </div>
+          <div class="field">
+            <label for="to">To</label>
+            <input id="to" name="to" value="Dubai" required />
+          </div>
+          <div class="field">
+            <label for="depart">Depart</label>
+            <input id="depart" name="depart" type="date" required />
+          </div>
+          <div class="field">
+            <label for="return">Return</label>
+            <input id="return" name="return" type="date" />
+          </div>
+          <div class="field">
+            <label for="cabin">Cabin</label>
+            <select id="cabin" name="cabin">
+              <option>Economy</option>
+              <option>Business</option>
+              <option>First Class</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="passengers">Passengers</label>
+            <select id="passengers" name="passengers">
+              <option>1 Adult</option>
+              <option>2 Adults</option>
+              <option>Family of 4</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="promo">Promo Code</label>
+            <input id="promo" name="promo" placeholder="Optional" />
+          </div>
+          <button class="form-submit" type="submit">Search Flights</button>
+        </div>
+        <div class="form-note">Sample search submitted. Your fare list is ready below.</div>
+      </form>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <p class="eyebrow">Recommended flights</p>
+          <h2 class="section-title">Popular departures available today.</h2>
+        </div>
+      </div>
+      <div class="results-grid">
+        <article class="flight-row reveal">
+          <div>
+            <div class="route-line"><span>Delhi</span><i></i><span>Dubai</span></div>
+            <p class="flight-detail">Nonstop morning departure, 3h 45m, Airbus A321neo</p>
+          </div>
+          <span class="status-pill">Best value</span>
+          <div class="price">Rs 12,499<small>one way</small></div>
+          <a class="solid-btn" href="#booking-form">Select</a>
+        </article>
+        <article class="flight-row reveal">
+          <div>
+            <div class="route-line"><span>Mumbai</span><i></i><span>Zurich</span></div>
+            <p class="flight-detail">One stop, overnight connection, generous checked baggage</p>
+          </div>
+          <span class="status-pill">Premium pick</span>
+          <div class="price">Rs 41,800<small>one way</small></div>
+          <a class="solid-btn" href="#booking-form">Select</a>
+        </article>
+        <article class="flight-row reveal">
+          <div>
+            <div class="route-line"><span>Bangalore</span><i></i><span>Singapore</span></div>
+            <p class="flight-detail">Evening departure, 4h 20m, convenient weekend schedule</p>
+          </div>
+          <span class="status-pill">Fastest</span>
+          <div class="price">Rs 18,250<small>one way</small></div>
+          <a class="solid-btn" href="#booking-form">Select</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section dark-band">
+    <div class="container split-layout">
+      <div class="reveal">
+        <p class="eyebrow">Booking confidence</p>
+        <h2 class="section-title">Everything important is visible before checkout.</h2>
+        <p class="section-copy">SkyFlew keeps fare rules, baggage, cancellation windows, seat options, and cabin upgrades close to the booking decision.</p>
+        <div class="list-stack">
+          <div class="list-item"><div class="list-icon">01</div><div><h3>Transparent fare rules</h3><p>Compare saver, flex, and premium fare families before choosing a seat.</p></div></div>
+          <div class="list-item"><div class="list-icon">02</div><div><h3>Easy add-ons</h3><p>Add checked baggage, lounge access, priority boarding, and meals in one flow.</p></div></div>
+          <div class="list-item"><div class="list-icon">03</div><div><h3>Instant confirmation</h3><p>Receive a booking reference and email itinerary immediately after payment.</p></div></div>
+        </div>
+      </div>
+      <div class="split-media reveal">
+        <img src="../assets/passenger-window.jpg" alt="Passenger looking through an airplane window" />
+      </div>
+    </div>
+  </section>
+
+  <section class="closing-cta">
+    <img src="../assets/wing-clouds.jpg" alt="Airplane wing over ocean clouds" />
+    <div class="container closing-inner reveal">
+      <div>
+        <h2>Prefer a lower fare first?</h2>
+        <p>Compare curated discounts before choosing your final travel date and cabin.</p>
+      </div>
+      <a class="solid-btn" href="deals.html">Browse Deals</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo"><img src="../assets/airrlogo.png" alt="SkyFlew logo" /><span>SkyFlew</span></div>
+        <p>Premium airline booking for travelers who value clarity, comfort, and beautifully planned journeys.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Fly</h4>
+        <ul><li><a href="book.html">Book a Flight</a></li><li><a href="deals.html">Deals</a></li><li><a href="destinations.html">Packages</a></li><li><a href="support.html#status">Flight Status</a></li></ul>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <ul><li><a href="support.html">Help Center</a></li><li><a href="support.html#manage">Manage Trip</a></li><li><a href="support.html#baggage">Baggage</a></li><li><a href="support.html#contact">Contact</a></li></ul>
+      </div>
+      <div class="footer-col">
+        <h4>Newsletter</h4>
+        <form class="newsletter" data-demo-form>
+          <input type="email" placeholder="Email address" required />
+          <button class="solid-btn" type="submit">Subscribe</button>
+          <div class="form-note">You are subscribed to SkyFlew fare alerts.</div>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>Copyright 2026 SkyFlew Airlines Pvt. Ltd. All rights reserved.</p>
+      <p>Privacy Policy &nbsp; Terms of Use &nbsp; Cookie Settings</p>
+    </div>
+  </div>
+</footer>
+<script src="../assets/site.js"></script>
+</body>
+</html>

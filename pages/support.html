@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Support | SkyFlew</title>
+<meta name="description" content="Get SkyFlew support for bookings, flight status, baggage, trip changes, cancellations, and customer contact requests." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../assets/site.css" />
+</head>
+<body>
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a class="brand" href="../index.html">
+      <img class="brand-mark" src="../assets/airrlogo.png" alt="SkyFlew logo" />
+      <span class="brand-name">SkyFlew</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="book.html">Book</a></li>
+      <li><a href="deals.html">Deals</a></li>
+      <li><a href="destinations.html">Destinations</a></li>
+      <li><a href="cabins.html">Cabins</a></li>
+      <li><a class="active" href="support.html">Support</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a class="ghost-btn" href="#manage">Manage Trip</a>
+      <a class="solid-btn" href="book.html">Book Now</a>
+    </div>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-panel" id="mobilePanel">
+  <a href="book.html">Book</a>
+  <a href="deals.html">Deals</a>
+  <a href="destinations.html">Destinations</a>
+  <a href="cabins.html">Cabins</a>
+  <a class="active" href="support.html">Support</a>
+</div>
+
+<main>
+  <section class="page-hero">
+    <img src="../assets/runway-service.jpg" alt="Airport ground service team guiding aircraft" />
+    <div class="container reveal">
+      <span class="page-kicker">Help center</span>
+      <h1>Support for every part of the journey.</h1>
+      <p>Find answers, manage a sample booking, check flight status, review baggage guidance, or send a contact request from one focused support page.</p>
+      <div class="hero-actions">
+        <a class="solid-btn" href="#contact">Contact Support</a>
+        <a class="ghost-btn" href="#faq">Read FAQ</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="quick-strip">
+    <div class="container quick-grid">
+      <div class="quick-card reveal"><b>24/7</b><span>digital help for urgent booking questions</span></div>
+      <div class="quick-card reveal"><b>2 min</b><span>sample manage-trip lookup interaction</span></div>
+      <div class="quick-card reveal"><b>Secure</b><span>forms designed for itinerary information</span></div>
+      <div class="quick-card reveal"><b>Clear</b><span>baggage and change guidance before travel</span></div>
+    </div>
+  </section>
+
+  <section class="section soft-band">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <p class="eyebrow">Support topics</p>
+          <h2 class="section-title">Start with the task you need to complete.</h2>
+        </div>
+      </div>
+      <div class="card-grid">
+        <article class="support-card reveal" id="manage">
+          <div class="card-body">
+            <h3>Manage Trip</h3>
+            <p>Change dates, update passenger details, add seats, and review fare rules for your sample booking.</p>
+            <a class="small-btn" href="#manage-form">Open lookup</a>
+          </div>
+        </article>
+        <article class="support-card reveal" id="status">
+          <div class="card-body">
+            <h3>Flight Status</h3>
+            <p>Check departure timing, aircraft readiness, gate information, and route-specific updates.</p>
+            <a class="small-btn" href="#status-form">Check status</a>
+          </div>
+        </article>
+        <article class="support-card reveal" id="baggage">
+          <div class="card-body">
+            <h3>Baggage</h3>
+            <p>Understand cabin bags, checked allowances, sports equipment, and priority handling options.</p>
+            <a class="small-btn" href="#faq">Read rules</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container split-layout">
+      <div class="reveal">
+        <p class="eyebrow">Self-service tools</p>
+        <h2 class="section-title">Look up your trip or flight status.</h2>
+        <p class="section-copy">These UI forms are ready for real booking and operations APIs. For now they show friendly confirmation states.</p>
+        <div class="list-stack">
+          <form class="form-panel" id="manage-form" data-demo-form>
+            <div class="form-grid two">
+              <div class="field"><label for="booking-ref">Booking reference</label><input id="booking-ref" name="booking-ref" placeholder="SF1234" required /></div>
+              <div class="field"><label for="last-name">Last name</label><input id="last-name" name="last-name" placeholder="Sharma" required /></div>
+              <button class="form-submit" type="submit">Find Trip</button>
+            </div>
+            <div class="form-note">Trip found in the demo flow. You can now review changes, seats, and baggage.</div>
+          </form>
+          <form class="form-panel" id="status-form" data-demo-form>
+            <div class="form-grid two">
+              <div class="field"><label for="flight-no">Flight number</label><input id="flight-no" name="flight-no" placeholder="SF 210" required /></div>
+              <div class="field"><label for="flight-date">Date</label><input id="flight-date" name="flight-date" type="date" required /></div>
+              <button class="form-submit" type="submit">Check Flight</button>
+            </div>
+            <div class="form-note">Flight status loaded in the demo flow. Departure information is ready.</div>
+          </form>
+        </div>
+      </div>
+      <div class="split-media reveal">
+        <img src="../assets/wing-engine.jpg" alt="Aircraft engine and wing at airport gate" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section soft-band" id="faq">
+    <div class="container split-layout">
+      <div class="reveal">
+        <p class="eyebrow">FAQ</p>
+        <h2 class="section-title">Answers before you fly.</h2>
+        <p class="section-copy">The most common questions are grouped around bookings, changes, baggage, and payments.</p>
+      </div>
+      <div class="faq-list reveal">
+        <div class="faq-item open">
+          <button class="faq-question" type="button">How do I change my booking?<span>+</span></button>
+          <div class="faq-answer">Use Manage Trip with your booking reference and last name. Eligible fares can change travel dates, seats, and add-ons before departure.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" type="button">What baggage is included?<span>+</span></button>
+          <div class="faq-answer">Cabin baggage is included on most fares. Checked baggage depends on route, cabin, and fare family and is shown before checkout.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" type="button">Can I request a refund?<span>+</span></button>
+          <div class="faq-answer">Refund eligibility depends on fare rules. The manage-trip area can show refundable amounts, fees, and travel credit options.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" type="button">How do I get special assistance?<span>+</span></button>
+          <div class="faq-answer">Send a support request with your booking reference at least 48 hours before departure so the airport team can prepare.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <div class="container contact-layout">
+      <aside class="contact-panel reveal">
+        <img src="../assets/passenger-window.jpg" alt="Passenger near aircraft window" />
+        <h2>Contact SkyFlew support.</h2>
+        <p>Send a message for booking help, payment questions, special assistance, baggage claims, or partnership inquiries.</p>
+        <div class="contact-lines">
+          <div class="contact-line"><b>Email</b><span>support@skyflew.example</span></div>
+          <div class="contact-line"><b>Phone</b><span>+91 80000 12345</span></div>
+          <div class="contact-line"><b>Hours</b><span>Always open for digital support</span></div>
+        </div>
+      </aside>
+      <form class="form-panel reveal" data-demo-form>
+        <div class="form-grid two">
+          <div class="field"><label for="name">Name</label><input id="name" name="name" placeholder="Your name" required /></div>
+          <div class="field"><label for="contact-email">Email</label><input id="contact-email" name="contact-email" type="email" placeholder="you@example.com" required /></div>
+          <div class="field"><label for="topic">Topic</label><select id="topic" name="topic"><option>Booking help</option><option>Refund or change</option><option>Baggage</option><option>Special assistance</option></select></div>
+          <div class="field"><label for="contact-ref">Booking reference</label><input id="contact-ref" name="contact-ref" placeholder="Optional" /></div>
+          <div class="field full"><label for="message">Message</label><textarea id="message" name="message" placeholder="Tell us what happened and how we can help" required></textarea></div>
+          <button class="form-submit" type="submit">Send Message</button>
+        </div>
+        <div class="form-note">Message sent in the demo UI. SkyFlew support will follow up with the next step.</div>
+      </form>
+    </div>
+  </section>
+
+  <section class="closing-cta">
+    <img src="../assets/airr.png" alt="SkyFlew airplane in blue sky" />
+    <div class="container closing-inner reveal">
+      <div>
+        <h2>Need to make a new booking instead?</h2>
+        <p>Return to flight search and choose the route, date, and cabin that works best.</p>
+      </div>
+      <a class="solid-btn" href="book.html">Book a Flight</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo"><img src="../assets/airrlogo.png" alt="SkyFlew logo" /><span>SkyFlew</span></div>
+        <p>Premium airline booking for travelers who value clarity, comfort, and beautifully planned journeys.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Fly</h4>
+        <ul><li><a href="book.html">Book a Flight</a></li><li><a href="deals.html">Deals</a></li><li><a href="destinations.html">Packages</a></li><li><a href="#status">Flight Status</a></li></ul>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <ul><li><a href="#faq">Help Center</a></li><li><a href="#manage">Manage Trip</a></li><li><a href="#baggage">Baggage</a></li><li><a href="#contact">Contact</a></li></ul>
+      </div>
+      <div class="footer-col">
+        <h4>Newsletter</h4>
+        <form class="newsletter" data-demo-form>
+          <input type="email" placeholder="Email address" required />
+          <button class="solid-btn" type="submit">Subscribe</button>
+          <div class="form-note">You are subscribed to SkyFlew fare alerts.</div>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>Copyright 2026 SkyFlew Airlines Pvt. Ltd. All rights reserved.</p>
+      <p>Privacy Policy &nbsp; Terms of Use &nbsp; Cookie Settings</p>
+    </div>
+  </div>
+</footer>
+<script src="../assets/site.js"></script>
+</body>
+</html>

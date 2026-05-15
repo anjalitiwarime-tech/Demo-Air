@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cabins | SkyFlew</title>
+<meta name="description" content="Compare SkyFlew Economy, Business, and First Class cabin experiences, seating, service, baggage, and upgrade options." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../assets/site.css" />
+</head>
+<body>
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a class="brand" href="../index.html">
+      <img class="brand-mark" src="../assets/airrlogo.png" alt="SkyFlew logo" />
+      <span class="brand-name">SkyFlew</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="book.html">Book</a></li>
+      <li><a href="deals.html">Deals</a></li>
+      <li><a href="destinations.html">Destinations</a></li>
+      <li><a class="active" href="cabins.html">Cabins</a></li>
+      <li><a href="support.html">Support</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a class="ghost-btn" href="support.html#manage">Manage Trip</a>
+      <a class="solid-btn" href="book.html">Book Now</a>
+    </div>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-panel" id="mobilePanel">
+  <a href="book.html">Book</a>
+  <a href="deals.html">Deals</a>
+  <a href="destinations.html">Destinations</a>
+  <a class="active" href="cabins.html">Cabins</a>
+  <a href="support.html">Support</a>
+</div>
+
+<main>
+  <section class="page-hero">
+    <img src="../assets/first-class.png" alt="Luxury aircraft cabin interior" />
+    <div class="container reveal">
+      <span class="page-kicker">Cabin experience</span>
+      <h1>Choose a cabin that fits the purpose of the journey.</h1>
+      <p>Compare practical comfort, business productivity, and private long-haul rest before you select a fare.</p>
+      <div class="hero-actions">
+        <a class="solid-btn" href="#compare">Compare Cabins</a>
+        <a class="ghost-btn" href="book.html">Search by Cabin</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="quick-strip">
+    <div class="container quick-grid">
+      <div class="quick-card reveal"><b>31 in</b><span>sample economy seat pitch on selected aircraft</span></div>
+      <div class="quick-card reveal"><b>Flat bed</b><span>available on long-haul premium routes</span></div>
+      <div class="quick-card reveal"><b>Lounge</b><span>included with eligible premium fares</span></div>
+      <div class="quick-card reveal"><b>Upgrade</b><span>offers shown when seats are available</span></div>
+    </div>
+  </section>
+
+  <section class="section soft-band">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <p class="eyebrow">Cabin options</p>
+          <h2 class="section-title">Three ways to travel well.</h2>
+          <p class="section-copy">Each cabin has a different job: value, focus, or rest. The right choice depends on route length, schedule, and what happens after you land.</p>
+        </div>
+      </div>
+      <div class="card-grid">
+        <article class="cabin-card reveal">
+          <div class="card-image tall">
+            <img src="../assets/economy-seat.png" alt="Modern economy class seats" />
+            <span class="badge">Everyday value</span>
+          </div>
+          <div class="card-body">
+            <h3>Economy</h3>
+            <p>Clean seating, clear fare rules, optional baggage, and paid seat selection for practical trips.</p>
+            <a class="small-btn" href="book.html">Book Economy</a>
+          </div>
+        </article>
+        <article class="cabin-card reveal">
+          <div class="card-image tall">
+            <img src="../assets/airseet1.png" alt="Premium cabin window and onboard refreshment area" onerror="this.src='../assets/first-class.png'" />
+            <span class="badge">Work and arrive</span>
+          </div>
+          <div class="card-body">
+            <h3>Business</h3>
+            <p>More privacy, lounge eligibility, priority services, and space to work or rest between meetings.</p>
+            <a class="small-btn" href="book.html">Book Business</a>
+          </div>
+        </article>
+        <article class="cabin-card reveal">
+          <div class="card-image tall">
+            <img src="../assets/first-class.png" alt="First class aircraft cabin" />
+            <span class="badge">Private long-haul</span>
+          </div>
+          <div class="card-body">
+            <h3>First Class</h3>
+            <p>Lie-flat comfort, premium service, quieter space, and a more personal long-haul experience.</p>
+            <a class="small-btn" href="book.html">Book First</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="compare">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <p class="eyebrow">Cabin comparison</p>
+          <h2 class="section-title">See what changes between fare families.</h2>
+        </div>
+      </div>
+      <table class="comparison reveal">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Economy</th>
+            <th>Business</th>
+            <th>First Class</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Best for</td>
+            <td>Short trips, value fares, family travel</td>
+            <td>Work trips, longer routes, better rest</td>
+            <td>Private long-haul comfort and highest service level</td>
+          </tr>
+          <tr>
+            <td>Seat experience</td>
+            <td>Standard recline with preferred-seat add-ons</td>
+            <td>Extra width, more recline, lie-flat on selected aircraft</td>
+            <td>Private suite style seating where aircraft support it</td>
+          </tr>
+          <tr>
+            <td>Airport priority</td>
+            <td>Optional add-on</td>
+            <td>Included on eligible fares</td>
+            <td>Included with premium assistance</td>
+          </tr>
+          <tr>
+            <td>Baggage</td>
+            <td>Cabin bag plus selected checked-bag options</td>
+            <td>Higher allowance on most long-haul routes</td>
+            <td>Highest allowance and priority handling</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section dark-band">
+    <div class="container split-layout">
+      <div class="split-media reveal">
+        <img src="../assets/passenger-window.jpg" alt="Passenger looking through airplane window" />
+      </div>
+      <div class="reveal">
+        <p class="eyebrow">Upgrade request</p>
+        <h2 class="section-title">Ask for an upgrade window before departure.</h2>
+        <p class="section-copy">Submit a sample upgrade request and the interface will confirm it instantly. A real version can connect to booking and inventory data.</p>
+        <form class="form-panel" data-demo-form>
+          <div class="form-grid two">
+            <div class="field"><label for="booking">Booking reference</label><input id="booking" name="booking" placeholder="SF1234" required /></div>
+            <div class="field"><label for="upgrade-cabin">Preferred cabin</label><select id="upgrade-cabin" name="upgrade-cabin"><option>Business</option><option>First Class</option></select></div>
+            <div class="field full"><label for="upgrade-note">Travel note</label><textarea id="upgrade-note" name="upgrade-note" placeholder="Tell us what matters for this trip"></textarea></div>
+            <button class="form-submit" type="submit">Request Upgrade</button>
+          </div>
+          <div class="form-note">Upgrade request received. SkyFlew will show available options for your sample booking.</div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="closing-cta">
+    <img src="../assets/runway-service.jpg" alt="Ground crew guiding an aircraft" />
+    <div class="container closing-inner reveal">
+      <div>
+        <h2>Ready to choose your seat?</h2>
+        <p>Search by cabin and route to see sample fares built around comfort and schedule.</p>
+      </div>
+      <a class="solid-btn" href="book.html">Search Flights</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo"><img src="../assets/airrlogo.png" alt="SkyFlew logo" /><span>SkyFlew</span></div>
+        <p>Premium airline booking for travelers who value clarity, comfort, and beautifully planned journeys.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Fly</h4>
+        <ul><li><a href="book.html">Book a Flight</a></li><li><a href="deals.html">Deals</a></li><li><a href="destinations.html">Packages</a></li><li><a href="support.html#status">Flight Status</a></li></ul>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <ul><li><a href="support.html">Help Center</a></li><li><a href="support.html#manage">Manage Trip</a></li><li><a href="support.html#baggage">Baggage</a></li><li><a href="support.html#contact">Contact</a></li></ul>
+      </div>
+      <div class="footer-col">
+        <h4>Newsletter</h4>
+        <form class="newsletter" data-demo-form>
+          <input type="email" placeholder="Email address" required />
+          <button class="solid-btn" type="submit">Subscribe</button>
+          <div class="form-note">You are subscribed to SkyFlew fare alerts.</div>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>Copyright 2026 SkyFlew Airlines Pvt. Ltd. All rights reserved.</p>
+      <p>Privacy Policy &nbsp; Terms of Use &nbsp; Cookie Settings</p>
+    </div>
+  </div>
+</footer>
+<script src="../assets/site.js"></script>
+</body>
+</html>

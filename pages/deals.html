@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Flight Deals | SkyFlew</title>
+<meta name="description" content="Explore SkyFlew fare deals, weekend escapes, premium cabin offers, and limited route promotions." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../assets/site.css" />
+</head>
+<body>
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a class="brand" href="../index.html">
+      <img class="brand-mark" src="../assets/airrlogo.png" alt="SkyFlew logo" />
+      <span class="brand-name">SkyFlew</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="book.html">Book</a></li>
+      <li><a class="active" href="deals.html">Deals</a></li>
+      <li><a href="destinations.html">Destinations</a></li>
+      <li><a href="cabins.html">Cabins</a></li>
+      <li><a href="support.html">Support</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a class="ghost-btn" href="support.html#manage">Manage Trip</a>
+      <a class="solid-btn" href="book.html">Book Now</a>
+    </div>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-panel" id="mobilePanel">
+  <a href="book.html">Book</a>
+  <a class="active" href="deals.html">Deals</a>
+  <a href="destinations.html">Destinations</a>
+  <a href="cabins.html">Cabins</a>
+  <a href="support.html">Support</a>
+</div>
+
+<main>
+  <section class="page-hero">
+    <img src="../assets/wing-engine.jpg" alt="Aircraft wing and engine at the airport" />
+    <div class="container reveal">
+      <span class="page-kicker">Fare offers</span>
+      <h1>Smart routes, seasonal prices, and premium upgrades.</h1>
+      <p>Use curated deal groups to find quick getaways, business routes, long-haul escapes, and cabin upgrades without scrolling through irrelevant fares.</p>
+      <div class="hero-actions">
+        <a class="solid-btn" href="#deal-list">View Deals</a>
+        <a class="ghost-btn" href="#alerts">Get Fare Alerts</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="quick-strip">
+    <div class="container quick-grid">
+      <div class="quick-card reveal"><b>35%</b><span>sample savings on selected shoulder-season routes</span></div>
+      <div class="quick-card reveal"><b>48 hr</b><span>limited fare windows on flash offers</span></div>
+      <div class="quick-card reveal"><b>2x</b><span>points on premium cabin promotions</span></div>
+      <div class="quick-card reveal"><b>Free</b><span>fare alerts for favorite destinations</span></div>
+    </div>
+  </section>
+
+  <section class="section soft-band" id="deal-list">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <p class="eyebrow">Featured deals</p>
+          <h2 class="section-title">Choose the offer type that fits your trip.</h2>
+        </div>
+        <div class="filter-tabs" aria-label="Deal filters">
+          <button class="active" type="button" data-deal-filter="all">All</button>
+          <button type="button" data-deal-filter="city">City</button>
+          <button type="button" data-deal-filter="beach">Beach</button>
+          <button type="button" data-deal-filter="premium">Premium</button>
+        </div>
+      </div>
+      <div class="card-grid">
+        <article class="deal-card reveal" data-deal-card="city">
+          <div class="card-image">
+            <img src="../assets/city-skyline-plane.jpg" alt="Aircraft flying above city skyline" />
+            <span class="badge">Urban route</span>
+          </div>
+          <div class="card-body">
+            <h3>Delhi to Dubai</h3>
+            <p>Short-haul international fare with flexible departure times and easy business-day returns.</p>
+            <div class="card-meta"><div class="price">Rs 12,499<small>one way</small></div><a class="small-btn" href="book.html">Book</a></div>
+          </div>
+        </article>
+        <article class="deal-card reveal" data-deal-card="premium">
+          <div class="card-image">
+            <img src="../assets/first-class.png" alt="Premium first class cabin" />
+            <span class="badge">Upgrade saver</span>
+          </div>
+          <div class="card-body">
+            <h3>Mumbai to Zurich</h3>
+            <p>Long-haul premium fare with lounge access, lie-flat seating, and added baggage allowance.</p>
+            <div class="card-meta"><div class="price">Rs 76,900<small>business</small></div><a class="small-btn" href="book.html">Book</a></div>
+          </div>
+        </article>
+        <article class="deal-card reveal" data-deal-card="beach">
+          <div class="card-image">
+            <img src="../assets/tropical-sunset.jpg" alt="Tropical palm trees during sunset" />
+            <span class="badge">Beach break</span>
+          </div>
+          <div class="card-body">
+            <h3>Bangalore to Phuket</h3>
+            <p>Four-night island escape with weekend-friendly timings and compact baggage options.</p>
+            <div class="card-meta"><div class="price">Rs 21,400<small>round trip</small></div><a class="small-btn" href="book.html">Book</a></div>
+          </div>
+        </article>
+        <article class="deal-card reveal" data-deal-card="city">
+          <div class="card-image">
+            <img src="../assets/europe-lucerne.jpg" alt="Lucerne waterfront in Switzerland" />
+            <span class="badge">Europe classic</span>
+          </div>
+          <div class="card-body">
+            <h3>Delhi to Zurich</h3>
+            <p>A scenic Europe fare built for rail connections, lake stays, and flexible return dates.</p>
+            <div class="card-meta"><div class="price">Rs 44,800<small>one way</small></div><a class="small-btn" href="book.html">Book</a></div>
+          </div>
+        </article>
+        <article class="deal-card reveal" data-deal-card="premium">
+          <div class="card-image">
+            <img src="../assets/economy-seat.png" alt="Modern economy airline seats" />
+            <span class="badge">Comfort bundle</span>
+          </div>
+          <div class="card-body">
+            <h3>Chennai to Singapore</h3>
+            <p>Economy comfort bundle with preferred seats, one checked bag, and priority check-in.</p>
+            <div class="card-meta"><div class="price">Rs 19,700<small>one way</small></div><a class="small-btn" href="book.html">Book</a></div>
+          </div>
+        </article>
+        <article class="deal-card reveal" data-deal-card="beach">
+          <div class="card-image">
+            <img src="../assets/wing-clouds.jpg" alt="Aircraft wing over ocean and clouds" />
+            <span class="badge">Island fare</span>
+          </div>
+          <div class="card-body">
+            <h3>Kochi to Male</h3>
+            <p>Quick island routing with short flight time, easy morning departure, and resort transfers.</p>
+            <div class="card-meta"><div class="price">Rs 16,950<small>one way</small></div><a class="small-btn" href="book.html">Book</a></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="alerts">
+    <div class="container split-layout">
+      <div class="split-media reveal">
+        <img src="../assets/passenger-window.jpg" alt="Traveler watching clouds from a plane window" />
+      </div>
+      <div class="reveal">
+        <p class="eyebrow">Fare alerts</p>
+        <h2 class="section-title">Let the right fare find you.</h2>
+        <p class="section-copy">Save your preferred route and receive a sample notification when the fare drops or an upgrade window opens.</p>
+        <form class="form-panel" data-demo-form>
+          <div class="form-grid two">
+            <div class="field"><label for="route">Preferred route</label><input id="route" name="route" placeholder="Delhi to Zurich" required /></div>
+            <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" placeholder="you@example.com" required /></div>
+            <div class="field"><label for="budget">Target budget</label><input id="budget" name="budget" placeholder="Rs 45,000" /></div>
+            <button class="form-submit" type="submit">Create Alert</button>
+          </div>
+          <div class="form-note">Fare alert created. You will receive sample route updates.</div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="closing-cta">
+    <img src="../assets/alpine-lake.jpg" alt="Alpine lake and castle scenery" />
+    <div class="container closing-inner reveal">
+      <div>
+        <h2>Want destination ideas with these fares?</h2>
+        <p>Browse route-ready packages designed around the best seasonal flying windows.</p>
+      </div>
+      <a class="solid-btn" href="destinations.html">Explore Destinations</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo"><img src="../assets/airrlogo.png" alt="SkyFlew logo" /><span>SkyFlew</span></div>
+        <p>Premium airline booking for travelers who value clarity, comfort, and beautifully planned journeys.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Fly</h4>
+        <ul><li><a href="book.html">Book a Flight</a></li><li><a href="deals.html">Deals</a></li><li><a href="destinations.html">Packages</a></li><li><a href="support.html#status">Flight Status</a></li></ul>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <ul><li><a href="support.html">Help Center</a></li><li><a href="support.html#manage">Manage Trip</a></li><li><a href="support.html#baggage">Baggage</a></li><li><a href="support.html#contact">Contact</a></li></ul>
+      </div>
+      <div class="footer-col">
+        <h4>Newsletter</h4>
+        <form class="newsletter" data-demo-form>
+          <input type="email" placeholder="Email address" required />
+          <button class="solid-btn" type="submit">Subscribe</button>
+          <div class="form-note">You are subscribed to SkyFlew fare alerts.</div>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>Copyright 2026 SkyFlew Airlines Pvt. Ltd. All rights reserved.</p>
+      <p>Privacy Policy &nbsp; Terms of Use &nbsp; Cookie Settings</p>
+    </div>
+  </div>
+</footer>
+<script src="../assets/site.js"></script>
+</body>
+</html>
